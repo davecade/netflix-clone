@@ -7,9 +7,8 @@ function App() {
     <div className="App">
       <Navbar />
       <div className="banner__container">
-        <img className="banner__image" src={banner}></img>
+        <img className="banner__image" alt="banner" src={banner}></img>
       </div>
-      
     </div>
   );
 }
