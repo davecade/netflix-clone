@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import Tab from '../tab/tab.component'
 import './navbar.styles.scss'
 
 //-- Transparent styles
@@ -35,6 +36,14 @@ const Navbar = () => {
         <div className="navbar" style={background}>
             <div className="navbar__left">
                 <h1 className="navbar__title">NETFLIX</h1>
+                <div className="navbar__tabs">
+                    <Tab title={"Home"} />
+                    <Tab title={"TV Shows"} />
+                    <Tab title={"Movies"} />
+                    <Tab title={"New & Popular"} />
+                    <Tab title={"My List"} />
+                    <Tab title={"Watch it again"} />
+                </div>
             </div>
         </div>
     )
