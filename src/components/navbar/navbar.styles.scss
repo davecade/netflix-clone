@@ -2,54 +2,61 @@
 
 .navbar {
     position: fixed;
-    display: flex;
-    justify-content: space-between;
     width: 100%;
     height: 4rem;
     background: linear-gradient(to top, rgba(18, 18, 17, 0), rgba(18, 18, 17, 1));
     transition-property: background-color;
     transition-duration: 0.5s;
     font-family: helvetica, "Roboto", sans-serif;
-    
     padding: 0 3rem;
 
-    .navbar__left {
+    .navbar__content {
         display: flex;
-        height: 100%;
+        justify-content: space-between;
 
-        .navbar__title{
-            margin: auto 0;
-            color: #e50914;
-        }
-
-        .navbar__browse {
-            color: white;
+        .navbar__left {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 2rem;
-
-            h4 {
-                margin-right: .5rem;
+            height: 100%;
+    
+            .navbar__title{
+                margin: auto 0;
+                color: #e50914;
             }
+    
+            .navbar__browse {
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: 2rem;
 
-            .fas.fa-sort-down {
-                font-size: 2rem;
-                margin-bottom: 1rem;
+                &:hover {
+                    cursor: pointer;
+                }
+    
+                h4 {
+                    margin-right: .5rem;
+                }
+    
+                .fas.fa-sort-down {
+                    font-size: 2rem;
+                    margin-bottom: 1rem;
+                }
             }
-        }
-
-        .navbar__tabs {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #e5e5e5;
-            margin-left: 2rem;
-
-            @media(max-width: 884px) {
-                
+    
+            .navbar__tabs {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                color: #e5e5e5;
+                margin-left: 2rem;
+    
+                @media(max-width: 884px) {
+                    
+                }
             }
         }
     }
+
 
 }

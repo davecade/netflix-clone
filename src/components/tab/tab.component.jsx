@@ -1,9 +1,9 @@
 import React from 'react'
 import './tab.styles.scss'
 
-const Tab = ({ title }) => {
+const Tab = ({ title, className }) => {
     return (
-        <div className="navbar__tab">
+        <div className={className}>
             {title}
         </div>
     )
