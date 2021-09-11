@@ -76,6 +76,10 @@ const Navbar = () => {
                 </div>
                 <div className="navbar__right">
                     <Searchbar placeholder={"Titles, people, genres"} />
+                    <i className="fas fa-bell"></i>
+                    <div className="navbar__account">
+                        <img className="navbar__account__portrait" src="./assets/monk2.jpg" alt="" />
+                    </div>
                 </div>
             </div>
             <Tabdropdown dropdownState={dropdownState}/>
