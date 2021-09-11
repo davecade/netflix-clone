@@ -1,0 +1,14 @@
+.search__bar {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1rem;
+
+    .fas.fa-search{
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Tab from '../tab/tab.component'
+import Searchbar from '../searchbar/searchbar.component'
 import './navbar.styles.scss'
 
 //-- Transparent styles
@@ -44,6 +45,10 @@ const Navbar = () => {
                     <Tab title={"My List"} />
                     <Tab title={"Watch it again"} />
                 </div>
+            </div>
+
+            <div className="navbar__right">
+                <Searchbar />
             </div>
         </div>
     )
