@@ -11,11 +11,11 @@ const navBarSolid = {
     backgroundColor: "#131312"
 }
 
-
 const Navbar = () => {
-
+    console.log("Navbar rendered")
     const [ offset, setOffset ] = useState(0);
     const [ background, setBackground ] = useState({})
+    const [ browserWidth, setBrowserWidth ] = useState(window.innerWidth)
 
     const handleScroll = useCallback(() => {
         if(offset > 20) {
@@ -24,6 +24,12 @@ const Navbar = () => {
             setBackground(navBarTransparent)
         }
     }, [offset])
+
+    useEffect(()=> {
+        window.onresize = () => {
+            setBrowserWidth(window.innerWidth)
+        }
+    })
 
     useEffect(() => {
         window.onscroll = () => {
@@ -37,19 +43,29 @@ const Navbar = () => {
         <div className="navbar" style={background}>
             <div className="navbar__left">
                 <h1 className="navbar__title">NETFLIX</h1>
-                <div className="navbar__tabs">
-                    <Tab title={"Home"} />
-                    <Tab title={"TV Shows"} />
-                    <Tab title={"Movies"} />
-                    <Tab title={"New & Popular"} />
-                    <Tab title={"My List"} />
-                    <Tab title={"Watch it again"} />
-                </div>
-            </div>
 
+                {
+                    browserWidth < 1000 ?
+                    <div className="navbar__browse">
+                        <h4>Browse</h4>
+                        <i className="fas fa-sort-down"></i>
+                    </div>
+                    :
+                    <div className="navbar__tabs">
+                        <Tab title={"Home"} />
+                        <Tab title={"TV Shows"} />
+                        <Tab title={"Movies"} />
+                        <Tab title={"New & Popular"} />
+                        <Tab title={"My List"} />
+                        <Tab title={"Watch it again"} />
+                    </div>
+                }
+
+            </div>
             <div className="navbar__right">
                 <Searchbar />
             </div>
+
         </div>
     )
 }
