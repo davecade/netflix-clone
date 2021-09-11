@@ -54,7 +54,7 @@ const Navbar = () => {
                     <h1 className="navbar__title">NETFLIX</h1>
 
                     {
-                        browserWidth < 1000 ?
+                        browserWidth < 1410 ?
                         <div className="navbar__browse"
                             onMouseEnter={handleBrowseMouseEnter}
                             onMouseLeave={handleBrowseMouseLeave}
@@ -75,7 +75,7 @@ const Navbar = () => {
 
                 </div>
                 <div className="navbar__right">
-                    <Searchbar />
+                    <Searchbar placeholder={"Titles, people, genres"} />
                 </div>
             </div>
             <Tabdropdown dropdownState={dropdownState}/>

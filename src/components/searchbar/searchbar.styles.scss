@@ -1,12 +1,36 @@
-.search__bar {
+.searchbar__container {
     height: 100%;
+    width: 29rem;
     display: flex;
-    justify-content: center;
     align-items: center;
     color: white;
     font-size: 1rem;
+    background-color: #040302;
+    border: 1px solid white;
+    transition: all .5s;
 
     .fas.fa-search{
+        padding: 1rem;
+        font-size: 1.2rem;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .searchbar {
+        font-size: 1.6rem;
+        height: 100%;
+        width: 100%;
+        background-color: #040302; 
+        border: none;
+        outline: none;
+        color: white;
+    }
+
+    .fas.fa-times {
+        font-size: 2rem;
+        margin-right: 1rem;
+
         &:hover {
             cursor: pointer;
         }

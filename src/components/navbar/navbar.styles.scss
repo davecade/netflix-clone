@@ -53,10 +53,14 @@
                 color: #e5e5e5;
                 margin-left: 2rem;
     
-                @media(max-width: 884px) {
-                    
-                }
             }
+        }
+
+        .navbar__right {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 
