@@ -59,7 +59,7 @@ const Searchbar = ({ placeholder }) => {
             <input ref={searchbarEl} className="searchbar" value={searchBarValue} onChange={e => setSearchBarValue(e.target.value)} type="text" placeholder={placeholder} style={
                 {backgroundColor: searchBarOpen ? "" : "transparent"}
             } />
-            <i class="fas fa-times" onClick={handleClickCloseIcon} style={{visibility: searchBarValue==="" ? "hidden" : "visible"}}></i>
+            <i className="fas fa-times" onClick={handleClickCloseIcon} style={{visibility: searchBarValue==="" ? "hidden" : "visible"}}></i>
         </div>
     )
 }

@@ -17,6 +17,7 @@ const Navbar = () => {
     const [ background, setBackground ] = useState({})
     const [ browserWidth, setBrowserWidth ] = useState(window.innerWidth)
     const [ dropdownState, setDropdownState ] = useState(false)
+    const [ data, setData ] = useState("")
 
     const handleScroll = useCallback(() => {
         if(offset > 20) {
@@ -78,7 +79,7 @@ const Navbar = () => {
                     <Searchbar placeholder={"Titles, people, genres"} />
                     <i className="fas fa-bell"></i>
                     <div className="navbar__account">
-                        <img className="navbar__account__portrait" src="./assets/monk2.jpg" alt="" />
+                        <img className="navbar__account__portrait" src="./assets/ciri.jpg" alt="" />
                     </div>
                 </div>
             </div>
