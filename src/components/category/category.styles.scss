@@ -1,7 +1,8 @@
 .category__container {
     display: flex;
+    align-items: center;
     width: 100%;
-    height: 10rem;
+    height: 13rem;
 
     .scroll__left {
         position: absolute;
@@ -12,6 +13,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: 10;
+
 
         &:hover {
             cursor: pointer;
@@ -29,7 +32,7 @@
         height: 100%;
         width: 100%;
         overflow-X: scroll;
-        overflow: visible;
+        overflow: hidden;
         scroll-behavior: smooth;
         transition: scroll 1s;
     }
@@ -43,6 +46,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: 10;
 
         &:hover {
             cursor: pointer;

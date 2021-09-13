@@ -1,9 +1,9 @@
 .film__container {
-    height: 100%;
+    height: 10rem;
     min-width: 15rem;
     background-color: green;
     border-radius: 10px;
-    margin: 0 .2rem;
+    margin: 0 .3rem;
     text-align: center;
     color: white;
     transition-property: transform;
@@ -11,6 +11,7 @@
     border: 1px solid black;
 
     &:hover{
-        transform: scale(1.1)
+        transform: scale(1.1);
+        cursor: pointer;
     }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './App.scss';
 import Navbar from './components/navbar/navbar.component'
 import Banner from './components/banner/banner.component'
@@ -14,7 +14,6 @@ function App({ fetchDataStart }) {
 
     //-- Fetch data using redux Sagas
     fetchDataStart()
-
 
     //(async () => {
         // const newNum = Math.floor(Math.random() * 20)
@@ -41,7 +40,7 @@ function App({ fetchDataStart }) {
         // let networks = await fetchNetworks.json()
         // console.log("networks", networks)
       //})()
-}, [])
+}, [fetchDataStart])
 
   return (
     <div className="App">
