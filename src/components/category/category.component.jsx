@@ -1,17 +1,24 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect, useCallback } from 'react'
 import './category.styles.scss'
 import Film from '../film/film.component'
+import { connect } from 'react-redux'
+import { useState } from 'react/cjs/react.development'
 
-const Category = () => {
+const Category = ({ windowWidth }) => {
+    const [ scrollValue , setScrollValue ] = useState(0)
     let scroller = useRef()
 
-    const scrollLeft = () => {
-        scroller.current.scrollLeft -=1000
-    }
+    const scrollLeft = useCallback(() => {
+        scroller.current.scrollLeft -=scrollValue
+    }, [scrollValue])
 
-    const scrollRight = () => {
-        scroller.current.scrollLeft +=1000
-    }
+    const scrollRight = useCallback(() => {
+        scroller.current.scrollLeft +=scrollValue
+    }, [scrollValue])
+
+    useEffect(() => {
+        setScrollValue(windowWidth-50)
+    }, [windowWidth])
 
     return (
         <div  className="category__container">
@@ -67,4 +74,8 @@ const Category = () => {
     )
 }
 
-export default Category
+const mapStateToProps = state => ({
+    windowWidth: state.window.windowWidth
+})
+
+export default connect(mapStateToProps)(Category)

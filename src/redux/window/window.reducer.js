@@ -2,7 +2,7 @@ import { windowActionTypes } from '../window/window.types'
 
 const INITIAL_STATE = {
     windowHeight: 0,
-    windowWidth: 1410
+    windowWidth: 0
 }
 
 const windowReducer = (state = INITIAL_STATE, action) => {

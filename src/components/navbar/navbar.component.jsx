@@ -14,7 +14,7 @@ const navBarSolid = {
     backgroundColor: "#131312"
 }
 
-const Navbar = ({ windowWidth, setWindowWidth}) => {
+const Navbar = ({ windowWidth, setWindowWidth }) => {
     const [ offset, setOffset ] = useState(0);
     const [ background, setBackground ] = useState({})
     const [ dropdownState, setDropdownState ] = useState(false)
@@ -27,6 +27,10 @@ const Navbar = ({ windowWidth, setWindowWidth}) => {
             setBackground(navBarTransparent)
         }
     }, [offset])
+
+    useEffect(() => {
+        setWindowWidth(window.innerWidth)
+    }, [setWindowWidth])
 
     useEffect(()=> {
         window.onresize = () => {
@@ -56,7 +60,7 @@ const Navbar = ({ windowWidth, setWindowWidth}) => {
                     <h1 className="navbar__title">NETFLIX</h1>
 
                     {
-                        windowWidth < 1410 ?
+                        windowWidth < 1485 ?
                         <div className="navbar__browse"
                             onMouseEnter={handleBrowseMouseEnter}
                             onMouseLeave={handleBrowseMouseLeave}
