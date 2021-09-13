@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.scss';
 import Navbar from './components/navbar/navbar.component'
 import Banner from './components/banner/banner.component'
+import Category from './components/category/category.component'
 
 function App() {
   const [ banner, setBanner ] = useState("")
@@ -37,6 +38,7 @@ function App() {
     <div className="App">
       <Navbar />
       <Banner url={banner} />
+      <Category />
     </div>
   );
 }

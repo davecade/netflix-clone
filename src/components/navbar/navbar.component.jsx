@@ -3,6 +3,8 @@ import Tab from '../tab/tab.component'
 import Searchbar from '../searchbar/searchbar.component'
 import Tabdropdown from '../tabdropdown/tabdropdown.component'
 import './navbar.styles.scss'
+import { connect } from 'react-redux';
+import { setWindowWidth } from '../../redux/window/window.actions'
 
 //-- Transparent styles
 const navBarTransparent = {
@@ -12,12 +14,11 @@ const navBarSolid = {
     backgroundColor: "#131312"
 }
 
-const Navbar = () => {
+const Navbar = ({ windowWidth, setWindowWidth}) => {
     const [ offset, setOffset ] = useState(0);
     const [ background, setBackground ] = useState({})
-    const [ browserWidth, setBrowserWidth ] = useState(window.innerWidth)
     const [ dropdownState, setDropdownState ] = useState(false)
-    const [ data, setData ] = useState("")
+
 
     const handleScroll = useCallback(() => {
         if(offset > 20) {
@@ -29,7 +30,7 @@ const Navbar = () => {
 
     useEffect(()=> {
         window.onresize = () => {
-            setBrowserWidth(window.innerWidth)
+            setWindowWidth(window.innerWidth)
         }
     })
 
@@ -55,7 +56,7 @@ const Navbar = () => {
                     <h1 className="navbar__title">NETFLIX</h1>
 
                     {
-                        browserWidth < 1410 ?
+                        windowWidth < 1410 ?
                         <div className="navbar__browse"
                             onMouseEnter={handleBrowseMouseEnter}
                             onMouseLeave={handleBrowseMouseLeave}
@@ -88,4 +89,13 @@ const Navbar = () => {
     )
 }
 
-export default Navbar;
+const mapStateToProps = state => ({
+    windowWidth: state.window.windowWidth
+})
+
+const mapDispatchToProps = dispatch => ({
+    setWindowWidth: width => dispatch(setWindowWidth(width)),
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
