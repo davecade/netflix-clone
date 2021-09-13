@@ -1,0 +1,18 @@
+.banner__container {
+    width: 100%;
+
+    .banner__image {
+      width: 100%;
+    }
+
+    .banner__bottom__blur {
+      height: 100px;
+      width: 100%;
+      background: linear-gradient(to bottom, rgba(18, 18, 17, 0), rgba(18, 18, 17, 1));
+      z-index: 10;
+      position: absolute;
+      transform: translateY(-100px);
+      border: none;
+    }
+
+  }

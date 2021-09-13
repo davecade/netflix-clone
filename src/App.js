@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.scss';
 import Navbar from './components/navbar/navbar.component'
+import Banner from './components/banner/banner.component'
 
 function App() {
   const [ banner, setBanner ] = useState("")
@@ -16,10 +17,10 @@ function App() {
         
         let secondData = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=08aabbbef104512bb5432031efeae18c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_providers=netflix&with_watch_monetization_types=flatrate')
         let secondConverted = await secondData.json()
-        setBanner(`https://image.tmdb.org/t/p/original${secondConverted.results[newNum].poster_path}`)
+        setBanner(`https://image.tmdb.org/t/p/original${secondConverted.results[newNum].backdrop_path}`)
         let id = secondConverted.results[newNum].id
         console.log("ID", id)
-        let images = await fetch(`https://api.themoviedb.org/3/movie/${id}/images?api_key=08aabbbef104512bb5432031efeae18c&language=en-US`)
+        let images = await fetch(`https://api.themoviedb.org/3/movie/3/images?api_key=08aabbbef104512bb5432031efeae18c&language=en-US`)
         let convertedImages = await images.json()
         console.log("secondConverted", secondConverted)
         console.log("images", convertedImages)
@@ -35,12 +36,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <div className="banner__container">
-        <img className="banner__image" alt="banner" src={banner} style={{
-          width: "100vw"
-        }}></img>
-      </div>
-      {/* <h1 style={{color: "white"}}>{rand}</h1> */}
+      <Banner url={banner} />
     </div>
   );
 }
