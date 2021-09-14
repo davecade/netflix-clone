@@ -24,7 +24,7 @@ const Category = ({ windowWidth, category, title }) => {
         <Fragment>
             <div className="category__container">
                 <div className="category__title">
-                    <h1>{title}</h1>
+                    <h2>{title}</h2>
                 </div>
                 <div  className="category__content">
                     <div onClick={scrollLeft} className="scroll__left">
