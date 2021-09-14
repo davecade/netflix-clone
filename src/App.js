@@ -6,7 +6,7 @@ import Category from './components/category/category.component'
 import { fetchDataStart } from './redux/film/film.actions'
 import { connect } from 'react-redux';
 
-function App({ fetchDataStart }) {
+function App({ fetchDataStart, popular, trending }) {
   // const [ banner, setBanner ] = useState("")
   // const [ rand, setRand ] = useState(2)
 
@@ -46,16 +46,23 @@ function App({ fetchDataStart }) {
     <div className="App">
       <Navbar />
       <Banner />
-      <Category />
+      <Category title={"Popular on Netflix"} category={popular} />
+      <Category title={"Trending Now"} category={trending} />
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  trending: state.film.trending,
+  popular: state.film.popular
+})
+
 
 const mapDispatchToProps = dispatch => ({
   fetchDataStart: () => dispatch(fetchDataStart())
 })
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 
 //-- API Key: 08aabbbef104512bb5432031efeae18c

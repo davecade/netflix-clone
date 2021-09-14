@@ -1,12 +1,13 @@
 import React from 'react'
 import './film.styles.scss'
 
-const Film = () => {
+const Film = ({film}) => {
+    console.log("film", film)
     return (
         <div className="film__container">
-            INSERT MOVIE
+            <img src={`https://image.tmdb.org/t/p/original${film.poster_path}`} alt="" />
         </div>
     )
 }
 
-export default Film
+export default Film;

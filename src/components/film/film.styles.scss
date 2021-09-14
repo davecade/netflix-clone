@@ -1,7 +1,7 @@
 .film__container {
-    height: 10rem;
-    min-width: 15rem;
-    background-color: green;
+    height: 15rem;
+    min-width: 10rem;
+    background-color: #131312;
     border-radius: 10px;
     margin: 0 .3rem;
     text-align: center;
@@ -11,7 +11,13 @@
     border: 1px solid black;
 
     &:hover{
-        transform: scale(1.1);
+        transform: scale(1.2);
         cursor: pointer;
+    }
+
+    img {
+        height: 100%;
+        width: 100%;
+        border-radius: 10px;
     }
 }
