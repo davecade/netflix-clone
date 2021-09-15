@@ -4,21 +4,21 @@ import Searchbar from '../searchbar/searchbar.component'
 import Tabdropdown from '../tabdropdown/tabdropdown.component'
 import './navbar.styles.scss'
 import { connect } from 'react-redux';
-import { setWindowWidth } from '../../redux/window/window.actions'
+import { setWindowWidth, setWindowHeight } from '../../redux/window/window.actions'
 
 //-- Transparent styles
 const navBarTransparent = {
     background: "linear-gradient(to top, rgba(18, 18, 17, 0), rgba(18, 18, 17, 1))"
 }
 const navBarSolid = {
-    backgroundColor: "#131312"
+    backgroundColor: "black"
+    //--#131312
 }
 
-const Navbar = ({ windowWidth, setWindowWidth }) => {
+const Navbar = ({setWindowWidth, setWindowHeight,  windowWidth, windowHeight }) => {
     const [ offset, setOffset ] = useState(0);
     const [ background, setBackground ] = useState({})
     const [ dropdownState, setDropdownState ] = useState(false)
-
 
     const handleScroll = useCallback(() => {
         if(offset > 20) {
@@ -30,11 +30,13 @@ const Navbar = ({ windowWidth, setWindowWidth }) => {
 
     useEffect(() => {
         setWindowWidth(window.innerWidth)
-    }, [setWindowWidth])
+        setWindowHeight(window.innerHeight)
+    }, [setWindowWidth, setWindowHeight])
 
     useEffect(()=> {
         window.onresize = () => {
             setWindowWidth(window.innerWidth)
+            setWindowHeight(window.innerHeight)
         }
     })
 
@@ -94,11 +96,13 @@ const Navbar = ({ windowWidth, setWindowWidth }) => {
 }
 
 const mapStateToProps = state => ({
-    windowWidth: state.window.windowWidth
+    windowWidth: state.window.windowWidth,
+    windowHeight: state.window.windowHeight
 })
 
 const mapDispatchToProps = dispatch => ({
     setWindowWidth: width => dispatch(setWindowWidth(width)),
+    setWindowHeight: height => dispatch(setWindowHeight(height))
 })
 
 

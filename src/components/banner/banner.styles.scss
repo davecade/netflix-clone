@@ -1,17 +1,63 @@
 .banner__container {
     width: 100%;
 
-    .banner__image {
-      width: 100%;
-    }
+      .banner__image__container {
+        width: 100%;
 
-    .banner__bottom__blur {
-      height: 100px;
-      width: 100%;
-      background: linear-gradient(to bottom, rgba(18, 18, 17, 0), rgba(18, 18, 17, 1));
-      position: absolute;
-      transform: translateY(-100px);
-      border: none;
+        .banner__image {
+          width: 100%;
+          filter: brightness(50%);
+        }
+
+        .banner__content {
+          position: absolute;
+          width: 25rem;
+          margin-left: 3rem;
+
+            .banner__title {
+              color: white;
+              font-size: 3rem;
+              margin-bottom: 1rem;
+            }
+
+            .banner__overview {
+              color: white;
+              max-width: 25rem;
+              font-weight: 600;
+              margin-bottom: 1rem;
+            }
+
+            .banner__buttons {
+              .banner__play {
+                background: white;
+                color: black;
+                border-radius: .5rem;
+                padding: .9rem 2rem;
+                min-height: 2rem;
+                font-weight: bold;
+                border: none;
+                outline: none;
+
+                .fas.fa-play {
+                  margin-right: .5rem;
+                }
+
+                &:hover {
+                  cursor: pointer;
+                  opacity: .9;
+                }
+              }
+            }
+        }
+      }
+  
+        .banner__bottom__blur {
+          height: 100px;
+          width: 100%;
+          background: linear-gradient(to bottom, rgba(18, 18, 17, 0), rgba(18, 18, 17, 1));
+          position: absolute;
+          transform: translateY(-100px);
+          border: none;
     }
 
   }

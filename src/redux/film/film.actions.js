@@ -4,8 +4,8 @@ export const fetchDataStart = () => ({
     type: filmActionTypes.FETCH_DATA_START
 })
 
-export const setBannerImage = image => ({
-    type: filmActionTypes.SET_BANNER_IMAGE,
+export const setBannerData = image => ({
+    type: filmActionTypes.SET_BANNER_DATA,
     payload: image
 })
 

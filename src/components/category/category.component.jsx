@@ -22,7 +22,9 @@ const Category = ({ windowWidth, category, title }) => {
 
     return (
         <Fragment>
-            <div className="category__container">
+            <div className="category__container" style={{
+                visibility: category.length===0 ? "hidden" : "visible"
+            }}>
                 <div className="category__title">
                     <h2>{title}</h2>
                 </div>

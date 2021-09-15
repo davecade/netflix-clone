@@ -1,7 +1,7 @@
 import { filmActionTypes } from '../film/film.types'
 
 const INITIAL_STATE = {
-    bannerImage: '',
+    bannerData: [],
     trending: '',
     popular: ''
 }
@@ -9,10 +9,10 @@ const INITIAL_STATE = {
 const filmReducer = (state = INITIAL_STATE, action) => {
 
     switch(action.type) {
-        case filmActionTypes.SET_BANNER_IMAGE:
+        case filmActionTypes.SET_BANNER_DATA:
             return {
                 ...state,
-                bannerImage: action.payload
+                bannerData: action.payload
             }
 
         case filmActionTypes.SET_TRENDING:
