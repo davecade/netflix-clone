@@ -26,7 +26,6 @@ const requests = {
     comedy: `${tmdb}discover/movie?api_key=${apiKey}&language=en-US&with_genres=35`,
 
 }
-//-- https://image.tmdb.org/t/p/original${popular.results[randomNumber].backdrop_path
 
 
 export function* fetchDataStartAsync() {

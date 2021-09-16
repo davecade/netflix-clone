@@ -24,9 +24,8 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, selectedMovie}) => {
         if(selectedMovie.id) {
             getSelectedMovie({title: '', id: ''})
             setTrailerURL("")
-        } else {
-            getSelectedMovie(movie)
         }
+        getSelectedMovie(movie)
     }
 
     useEffect(() => {
