@@ -15,7 +15,7 @@ const navBarSolid = {
     //--#131312
 }
 
-const Navbar = ({setWindowWidth, setWindowHeight,  windowWidth, windowHeight }) => {
+const Navbar = ({setWindowWidth, setWindowHeight,  windowWidth }) => {
     const [ offset, setOffset ] = useState(0);
     const [ background, setBackground ] = useState({})
     const [ dropdownState, setDropdownState ] = useState(false)
@@ -86,7 +86,7 @@ const Navbar = ({setWindowWidth, setWindowHeight,  windowWidth, windowHeight }) 
                     <Searchbar placeholder={"Titles, people, genres"} />
                     <i className="fas fa-bell"></i>
                     <div className="navbar__account">
-                        <img className="navbar__account__portrait" src="./assets/ciri.jpg" alt="" />
+                        <img className="navbar__account__portrait" src="./assets/smile.jpg" alt="" />
                     </div>
                 </div>
             </div>

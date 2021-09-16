@@ -28,6 +28,7 @@
             }
 
             .banner__buttons {
+
               .banner__play {
                 background: white;
                 color: black;
@@ -37,7 +38,9 @@
                 font-weight: bold;
                 border: none;
                 outline: none;
-
+                margin-right: 1rem;
+                font-size: 1rem;
+                
                 .fas.fa-play {
                   margin-right: .5rem;
                 }
@@ -45,6 +48,28 @@
                 &:hover {
                   cursor: pointer;
                   opacity: .9;
+                }
+              }
+
+              .banner__info{
+                background-color: #696966;
+                color: white;
+                border-radius: .5rem;
+                padding: .9rem 2rem;
+                min-height: 2rem;
+                font-weight: bold;
+                border: none;
+                outline: none;
+                font-size: 1rem;
+
+                &:hover {
+                  cursor: pointer;
+                  opacity: .9;
+                }
+
+                .fas.fa-info-circle {
+                  font-size: 1rem;
+                  margin-right: .5rem;
                 }
               }
             }

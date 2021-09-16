@@ -2,8 +2,9 @@ import { filmActionTypes } from '../film/film.types'
 
 const INITIAL_STATE = {
     bannerData: [],
-    trending: '',
-    popular: ''
+    movies: [],
+    loading: false,
+    error: null
 }
 
 const filmReducer = (state = INITIAL_STATE, action) => {
@@ -15,15 +16,23 @@ const filmReducer = (state = INITIAL_STATE, action) => {
                 bannerData: action.payload
             }
 
-        case filmActionTypes.SET_TRENDING:
+        case filmActionTypes.SET_MOVIES:
             return {
                 ...state,
-                trending: action.payload
+                movies: action.payload
             }
-        case filmActionTypes.SET_POPULAR:
+        
+        case filmActionTypes.FETCH_DATA_SUCCESS:
             return {
                 ...state,
-                popular: action.payload
+                loading: false,
+                error: null
+            }
+        case filmActionTypes.FETCH_DATA_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
             }
 
         default:

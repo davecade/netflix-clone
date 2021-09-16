@@ -4,7 +4,18 @@ import Film from '../film/film.component'
 import { connect } from 'react-redux'
 import { Fragment, useState } from 'react/cjs/react.development'
 
-const Category = ({ windowWidth, category, title }) => {
+const categoryKeyMap = {
+    0: "Popular on Netflix",
+    1: "Trending Now",
+    2: "Action",
+    3: "Adventure",
+    4: "Animation",
+    5: "Comedy",
+    6: "Crime",
+    7: "Documentary"
+}
+
+const Category = ({ windowWidth, category, categoryID }) => {
     const [ scrollValue , setScrollValue ] = useState(windowWidth)
     let scroller = useRef()
 
@@ -26,7 +37,7 @@ const Category = ({ windowWidth, category, title }) => {
                 visibility: category.length===0 ? "hidden" : "visible"
             }}>
                 <div className="category__title">
-                    <h2>{title}</h2>
+                    <h2>{categoryKeyMap[categoryID]}</h2>
                 </div>
                 <div  className="category__content">
                     <div onClick={scrollLeft} className="scroll__left">

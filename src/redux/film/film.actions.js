@@ -9,12 +9,20 @@ export const setBannerData = image => ({
     payload: image
 })
 
-export const setTrending = films => ({
-    type: filmActionTypes.SET_TRENDING,
+export const setMovies = films => ({
+    type: filmActionTypes.SET_MOVIES,
     payload: films
 })
 
-export const setPopular = films => ({
-    type: filmActionTypes.SET_POPULAR,
-    payload: films
+export const startLoading = () => ({
+    type: filmActionTypes.START_LOADING
+})
+
+export const fetchDataSuccess = () => ({
+    type: filmActionTypes.FETCH_DATA_SUCCESS
+})
+
+export const fetchDataFailure = error => ({
+    type: filmActionTypes.FETCH_DATA_FAILURE,
+    payload: error
 })

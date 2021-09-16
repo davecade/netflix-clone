@@ -15,7 +15,7 @@ const searchBarClosedStyle = {
 
 const Searchbar = ({ placeholder }) => {
     const [ searchBarOpen, setSearchBarOpen ] = useState(false)
-    const [ searchBarStyles , setSearchBarStyles ] = useState({})
+    const [ searchBarStyles , setSearchBarStyles ] = useState(searchBarClosedStyle)
     const [ searchBarValue, setSearchBarValue ] = useState("")
     const searchbarEl = useRef()
 
