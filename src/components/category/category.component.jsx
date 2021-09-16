@@ -18,10 +18,10 @@ const categoryKeyMap = {
     1: "Trending Now",
     2: "Action Movies",
     3: "Adventure Movies",
-    4: "Animation Movies",
-    5: "Comedy Movies",
-    6: "Fantasy Movies",
-    7: "Science Fiction Movies"
+    4: "Fantasy Movies",
+    5: "Science Fiction Movies",
+    6: "Animation Movies",
+    7: "Comedy Movies"
 }
 
 const Category = ({ windowWidth, category, categoryID, loading, selectedMovie }) => {
@@ -42,9 +42,15 @@ const Category = ({ windowWidth, category, categoryID, loading, selectedMovie })
     }, [windowWidth])
 
     useEffect(() => {
-        if(selectedMovie.id===categoryID) {
-            const urlParams = new URLSearchParams(new URL(selectedMovie.url).search)
-            setTrailerURL(urlParams.get("v"))
+        if(selectedMovie.id===categoryID && selectedMovie.url) {
+            try {
+                const urlParams = new URLSearchParams(new URL(selectedMovie.url).search)
+                setTrailerURL(urlParams.get("v"))
+            } catch(error) {
+                console.log("Selected movie error: ", selectedMovie)
+                console.log(error)
+            }
+
         } else {
             setTrailerURL("")
         }

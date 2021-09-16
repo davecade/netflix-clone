@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { connect } from 'react-redux'
 import './banner.styles.scss'
 import { getSelectedMovie } from '../../redux/film/film.actions'
@@ -30,13 +30,26 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, selectedMovie}) => {
     }
 
     useEffect(() => {
-        if(selectedMovie.id==='banner') {
-            const urlParams = new URLSearchParams(new URL(selectedMovie.url).search)
-            setTrailerURL(urlParams.get("v"))
+        if(selectedMovie.id==='banner' && selectedMovie.url) {
+            try {
+                const urlParams = new URLSearchParams(new URL(selectedMovie.url).search)
+                setTrailerURL(urlParams.get("v"))
+            }catch(error) {
+                console.log(error)
+            }
         } else {
             setTrailerURL("")
         }
     }, [selectedMovie])
+    console.log("windowWidth", windowWidth)
+    const contentPosition = useMemo(() => {
+        if(windowWidth > 2000) {
+            return windowWidth/7
+        } else {
+            return windowWidth/6
+        }
+        
+    }, [windowWidth])
 
     return ( 
         <div className="banner__container">
@@ -45,7 +58,7 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, selectedMovie}) => {
                     width: "100vw",
                 }}></img>
                 <div className="banner__content" style={{
-                    top: `${windowWidth/6}px`,
+                    top: `${contentPosition}px`,
                     visibility: bannerData.id ? "visible" : "hidden"
                 }}>
 

@@ -12,17 +12,18 @@ import {
 
 const tmdb = 'https://api.themoviedb.org/3/'
 const apiKey = '08aabbbef104512bb5432031efeae18c'
+const randomNumber = () => Math.floor(Math.random() * 20)
 
 const requests = {
     discover: `${tmdb}discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_providers=netflix&with_watch_monetization_types=flatrate`,
-    popular: `${tmdb}movie/popular?api_key=${apiKey}&language=en-US&page=1`,
-    trending: `${tmdb}trending/movie/day?api_key=${apiKey}&page=2`,
-    action: `${tmdb}discover/movie?api_key=${apiKey}&with_genres=28&page=3`,
-    adventure: `${tmdb}discover/movie?api_key=${apiKey}&with_genres=12&page=4`,
-    animation: `${tmdb}discover/movie?api_key=${apiKey}&with_genres=16&page=5`,
-    comedy: `${tmdb}discover/movie?api_key=${apiKey}&with_genres=35&page=6`,
-    fantasy: `${tmdb}discover/movie?api_key=${apiKey}&with_genres=80&page=14`,
-    scienceFiction: `${tmdb}discover/movie?api_key=${apiKey}&with_genres=80&page=878`,
+    popular: `${tmdb}movie/popular?api_key=${apiKey}&language=en-US`,
+    trending: `${tmdb}trending/movie/day?api_key=${apiKey}&language=en-US`,
+    action: `${tmdb}discover/movie?api_key=${apiKey}&language=en-US&with_genres=28`,
+    adventure: `${tmdb}discover/movie?api_key=${apiKey}&language=en-US&with_genres=12`,
+    fantasy: `${tmdb}discover/movie?api_key=${apiKey}&language=en-US&with_genres=80`,
+    scienceFiction: `${tmdb}discover/movie?api_key=${apiKey}&language=en-US&with_genres=878`,
+    animation: `${tmdb}discover/movie?api_key=${apiKey}&language=en-US&with_genres=16`,
+    comedy: `${tmdb}discover/movie?api_key=${apiKey}&language=en-US&with_genres=35`,
 
 }
 //-- https://image.tmdb.org/t/p/original${popular.results[randomNumber].backdrop_path
@@ -31,26 +32,25 @@ const requests = {
 export function* fetchDataStartAsync() {
     try {
         yield put(startLoading())
-        const randomNumber = () => Math.floor(Math.random() * 20)
-
+        
         let fetchPopular = fetch(`${requests.popular}&page=${randomNumber()}`)
         let fetchTrending = fetch(`${requests.trending}&page=${randomNumber()}`)
         let fetchAction = fetch(`${requests.action}&page=${randomNumber()}`)
         let fetchAdventure = fetch(`${requests.adventure}&page=${randomNumber()}`)
-        let fetchAnimation = fetch(`${requests.animation}&page=${randomNumber()}`)
-        let fetchComedy = fetch(`${requests.comedy}&page=${randomNumber()}`)
         let fetchFantasy = fetch(`${requests.fantasy}&page=${randomNumber()}`)
         let fetchScienceFiction = fetch(`${requests.scienceFiction}&page=${randomNumber()}`)
+        let fetchAnimation = fetch(`${requests.animation}&page=${randomNumber()}`)
+        let fetchComedy = fetch(`${requests.comedy}&page=${randomNumber()}`)
 
         let fetchHomepageData = yield Promise.all([
             fetchPopular,
             fetchTrending,
             fetchAction,
             fetchAdventure,
-            fetchAnimation,
-            fetchComedy,
             fetchFantasy,
-            fetchScienceFiction
+            fetchScienceFiction,
+            fetchAnimation,
+            fetchComedy
         ])
 
         let homepageData = yield Promise.all(fetchHomepageData.map( item => {
