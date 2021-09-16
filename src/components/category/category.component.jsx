@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useEffect, useState } from 'react'
+import React, { Fragment, useRef, useEffect, useState, useCallback } from 'react'
 import './category.styles.scss'
 import Film from '../film/film.component'
 import { connect } from 'react-redux'
@@ -29,26 +29,25 @@ const Category = ({ windowWidth, category, categoryID, loading, selectedMovie })
     const [ trailerURL, setTrailerURL ] = useState("")
     let scroller = useRef()
 
-    const scrollLeft = () => {
+    const scrollLeft = useCallback(() => {
         scroller.current.scrollLeft -=scrollValue
-    }
+    }, [scrollValue])
 
-    const scrollRight = () => {
+    const scrollRight = useCallback(() => {
         scroller.current.scrollLeft +=scrollValue
-    }
+    }, [scrollValue])
 
     useEffect(() => {
-        setScrollValue(windowWidth-25)
+        setScrollValue(windowWidth-200)
     }, [windowWidth])
 
     useEffect(() => {
-        if(selectedMovie.id===categoryID && selectedMovie.url) {
+        if(selectedMovie.id===categoryID) {
             try {
                 const urlParams = new URLSearchParams(new URL(selectedMovie.url).search)
                 setTrailerURL(urlParams.get("v"))
             } catch(error) {
-                console.log("Selected movie error: ", selectedMovie)
-                console.log(error)
+                setTrailerURL("DB68T2s7gfI")
             }
 
         } else {
@@ -74,8 +73,7 @@ const Category = ({ windowWidth, category, categoryID, loading, selectedMovie })
                                 category.map( (film, index) => {
                                     return <Film key={index} categoryID={categoryID} id={index} film={film} />
                                 })
-                                :
-                                <div>None</div>
+                                : null
                             }
                         </div>
                     <div onClick={scrollRight} className="scroll__right">
@@ -89,7 +87,7 @@ const Category = ({ windowWidth, category, categoryID, loading, selectedMovie })
                         <YouTube videoId={trailerURL} opts={opts} />
                     </div>
                 </div>
-                : null
+                : trailerURL
             }
         </Fragment>
     )

@@ -41,7 +41,6 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, selectedMovie}) => {
             setTrailerURL("")
         }
     }, [selectedMovie])
-    console.log("windowWidth", windowWidth)
     const contentPosition = useMemo(() => {
         if(windowWidth > 2000) {
             return windowWidth/7
