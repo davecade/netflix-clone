@@ -21,11 +21,13 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, se
     const { title, overview } = bannerData
 
     const handleClick = async movie => {
-        if(selectedMovie.id) {
+
+        if(selectedMovie.id==='banner') {
             await setSelectedMovie({ url: '', id: '', title: '' })
             setTrailerURL("")
+        } else {
+            getSelectedMovie(movie)
         }
-        getSelectedMovie(movie)
     }
 
     useEffect(() => {
