@@ -21,7 +21,8 @@ const requests = {
     adventure: `${tmdb}discover/movie?api_key=${apiKey}&with_genres=12&page=4`,
     animation: `${tmdb}discover/movie?api_key=${apiKey}&with_genres=16&page=5`,
     comedy: `${tmdb}discover/movie?api_key=${apiKey}&with_genres=35&page=6`,
-    crime: `${tmdb}discover/movie?api_key=${apiKey}&with_genres=80&page=7`,
+    fantasy: `${tmdb}discover/movie?api_key=${apiKey}&with_genres=80&page=14`,
+    scienceFiction: `${tmdb}discover/movie?api_key=${apiKey}&with_genres=80&page=878`,
 
 }
 //-- https://image.tmdb.org/t/p/original${popular.results[randomNumber].backdrop_path
@@ -38,7 +39,8 @@ export function* fetchDataStartAsync() {
         let fetchAdventure = fetch(`${requests.adventure}&page=${randomNumber()}`)
         let fetchAnimation = fetch(`${requests.animation}&page=${randomNumber()}`)
         let fetchComedy = fetch(`${requests.comedy}&page=${randomNumber()}`)
-        let fetchCrime = fetch(`${requests.crime}&page=${randomNumber()}`)
+        let fetchFantasy = fetch(`${requests.fantasy}&page=${randomNumber()}`)
+        let fetchScienceFiction = fetch(`${requests.scienceFiction}&page=${randomNumber()}`)
 
         let fetchHomepageData = yield Promise.all([
             fetchPopular,
@@ -47,7 +49,8 @@ export function* fetchDataStartAsync() {
             fetchAdventure,
             fetchAnimation,
             fetchComedy,
-            fetchCrime
+            fetchFantasy,
+            fetchScienceFiction
         ])
 
         let homepageData = yield Promise.all(fetchHomepageData.map( item => {

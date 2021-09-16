@@ -16,12 +16,12 @@ const opts = {
 const categoryKeyMap = {
     0: "Popular on Netflix",
     1: "Trending Now",
-    2: "Action",
-    3: "Adventure",
-    4: "Animation",
-    5: "Comedy",
-    6: "Crime",
-    7: "Documentary"
+    2: "Action Movies",
+    3: "Adventure Movies",
+    4: "Animation Movies",
+    5: "Comedy Movies",
+    6: "Fantasy Movies",
+    7: "Science Fiction Movies"
 }
 
 const Category = ({ windowWidth, category, categoryID, loading, selectedMovie }) => {
