@@ -30,15 +30,15 @@ const requests = {
 export function* fetchDataStartAsync() {
     try {
         yield put(startLoading())
-        const randomNumber = Math.floor(Math.random() * 20)
+        const randomNumber = () => Math.floor(Math.random() * 20)
 
-        let fetchPopular = fetch(`${requests.popular}&page=${randomNumber}`)
-        let fetchTrending = fetch(requests.trending)
-        let fetchAction = fetch(requests.action)
-        let fetchAdventure = fetch(requests.adventure)
-        let fetchAnimation = fetch(requests.animation)
-        let fetchComedy = fetch(requests.comedy)
-        let fetchCrime = fetch(requests.crime)
+        let fetchPopular = fetch(`${requests.popular}&page=${randomNumber()}`)
+        let fetchTrending = fetch(`${requests.trending}&page=${randomNumber()}`)
+        let fetchAction = fetch(`${requests.action}&page=${randomNumber()}`)
+        let fetchAdventure = fetch(`${requests.adventure}&page=${randomNumber()}`)
+        let fetchAnimation = fetch(`${requests.animation}&page=${randomNumber()}`)
+        let fetchComedy = fetch(`${requests.comedy}&page=${randomNumber()}`)
+        let fetchCrime = fetch(`${requests.crime}&page=${randomNumber()}`)
 
         let fetchHomepageData = yield Promise.all([
             fetchPopular,
@@ -54,7 +54,7 @@ export function* fetchDataStartAsync() {
             return item.json()
         } ))
         console.log("homepageData", homepageData)
-        let bannerData = homepageData[0].results[randomNumber]
+        let bannerData = homepageData[0].results[randomNumber()]
 
         yield put(setBannerData(bannerData))
         yield put(setMovies(homepageData))
@@ -76,7 +76,7 @@ export function* getSelectedMovieAsync({payload: { title, id }}) {
         }
 
     } catch(error) {
-
+        console.log(error)
     }
 }
 

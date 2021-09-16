@@ -1,10 +1,42 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { connect } from 'react-redux'
 import './banner.styles.scss'
+import { getSelectedMovie } from '../../redux/film/film.actions'
+import YouTube from 'react-youtube';
 
-const Banner = ({bannerData, windowWidth}) => {
+
+const opts = {
+    height: `400`,
+    width: '100%',
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+    },
+};
+
+
+const Banner = ({bannerData, windowWidth, getSelectedMovie, selectedMovie}) => {
+    const [ trailerURL, setTrailerURL ] = useState("")
     const image = useRef()
     const { title, overview } = bannerData
+
+    const handleClick = movie => {
+        if(selectedMovie.id) {
+            getSelectedMovie({title: '', id: ''})
+            setTrailerURL("")
+        } else {
+            getSelectedMovie(movie)
+        }
+    }
+
+    useEffect(() => {
+        if(selectedMovie.id==='banner') {
+            const urlParams = new URLSearchParams(new URL(selectedMovie.url).search)
+            setTrailerURL(urlParams.get("v"))
+        } else {
+            setTrailerURL("")
+        }
+    }, [selectedMovie])
 
     return ( 
         <div className="banner__container">
@@ -13,7 +45,7 @@ const Banner = ({bannerData, windowWidth}) => {
                     width: "100vw",
                 }}></img>
                 <div className="banner__content" style={{
-                    top: `${windowWidth/5}px`,
+                    top: `${windowWidth/6}px`,
                     visibility: bannerData.id ? "visible" : "hidden"
                 }}>
 
@@ -25,9 +57,9 @@ const Banner = ({bannerData, windowWidth}) => {
                         {overview}
                     </p>
                     <div className="banner__buttons">
-                        <button className="banner__play">
-                            <i class="fas fa-play"></i>
-                            Play
+                        <button className="banner__play" onClick={() => handleClick({title: bannerData.title, id: 'banner'})}>
+                            <i className={`fas fa-${trailerURL ? "stop" : "play"}`}></i>
+                            {trailerURL ? "Stop" : "Play"}
                         </button>
                         <button className="banner__info">
                             <i class="fas fa-info-circle"></i>
@@ -37,6 +69,16 @@ const Banner = ({bannerData, windowWidth}) => {
                 </div>
             </div>
             <div className="banner__bottom__blur"></div>
+            {
+                trailerURL ?
+                <div className="youtube__container">
+                    <div className="youtube__video">
+                        <YouTube videoId={trailerURL} opts={opts} />
+                    </div>
+                </div>
+                :
+                null
+            }
         </div>
     )
     
@@ -46,7 +88,12 @@ const Banner = ({bannerData, windowWidth}) => {
 const mapStateToProps = state => ({
     bannerData: state.film.bannerData,
     windowWidth: state.window.windowWidth,
-    loading: state.film.loading
+    loading: state.film.loading,
+    selectedMovie: state.film.selectedMovie
 })
 
-export default connect(mapStateToProps)(Banner)
+const mapDispatchToProps = dispatch => ({
+    getSelectedMovie: movie => dispatch(getSelectedMovie(movie))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Banner)

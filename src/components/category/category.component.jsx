@@ -48,7 +48,7 @@ const Category = ({ windowWidth, category, categoryID, loading, selectedMovie })
         } else {
             setTrailerURL("")
         }
-    }, [selectedMovie])
+    }, [selectedMovie, categoryID])
 
     return (
         <Fragment>

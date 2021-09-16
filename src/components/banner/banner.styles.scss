@@ -12,18 +12,27 @@
         .banner__content {
           position: absolute;
           width: 25rem;
+          max-height: 25rem;
+          overflow-Y: scroll;
+          -ms-overflow-style: none; /* for Internet Explorer, Edge */
+          scrollbar-width: none; /* for Firefox */
+
+          &::-webkit-scrollbar { 
+              display: none; /* for Chrome, Safari, and Opera */
+          }
           margin-left: 3rem;
+
 
             .banner__title {
               color: white;
-              font-size: 3rem;
+              font-size: 2rem;
               margin-bottom: 1rem;
             }
 
             .banner__overview {
               color: white;
               max-width: 25rem;
-              font-weight: 600;
+              font-weight: 400;
               margin-bottom: 1rem;
             }
 
@@ -40,8 +49,8 @@
                 outline: none;
                 margin-right: 1rem;
                 font-size: 1rem;
-                
-                .fas.fa-play {
+
+                .fas.fa-play, .fas.fa-stop {
                   margin-right: .5rem;
                 }
 
