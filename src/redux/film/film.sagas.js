@@ -56,7 +56,7 @@ export function* fetchDataStartAsync() {
         let homepageData = yield Promise.all(fetchHomepageData.map( item => {
             return item.json()
         } ))
-        console.log("homepageData", homepageData)
+
         let bannerData = homepageData[0].results[randomNumber()]
 
         yield put(setBannerData(bannerData))
