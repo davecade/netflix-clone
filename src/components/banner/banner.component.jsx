@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { connect } from 'react-redux'
 import './banner.styles.scss'
-import { getSelectedMovie } from '../../redux/film/film.actions'
+import { getSelectedMovie, setSelectedMovie } from '../../redux/film/film.actions'
 import YouTube from 'react-youtube';
 
 
@@ -15,14 +15,14 @@ const opts = {
 };
 
 
-const Banner = ({bannerData, windowWidth, getSelectedMovie, selectedMovie}) => {
+const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, selectedMovie}) => {
     const [ trailerURL, setTrailerURL ] = useState("")
     const image = useRef()
     const { title, overview } = bannerData
 
-    const handleClick = movie => {
+    const handleClick = async movie => {
         if(selectedMovie.id) {
-            getSelectedMovie({title: '', id: ''})
+            await setSelectedMovie({ url: '', id: '', title: '' })
             setTrailerURL("")
         }
         getSelectedMovie(movie)
@@ -40,6 +40,7 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, selectedMovie}) => {
             setTrailerURL("")
         }
     }, [selectedMovie])
+
     const contentPosition = useMemo(() => {
         if(windowWidth > 2000) {
             return windowWidth/7
@@ -104,7 +105,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    getSelectedMovie: movie => dispatch(getSelectedMovie(movie))
+    getSelectedMovie: movie => dispatch(getSelectedMovie(movie)),
+    setSelectedMovie: movie => dispatch(setSelectedMovie(movie))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Banner)
