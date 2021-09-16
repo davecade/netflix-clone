@@ -1,8 +1,17 @@
-import React, { useRef, useEffect } from 'react'
+import React, { Fragment, useRef, useEffect, useState } from 'react'
 import './category.styles.scss'
 import Film from '../film/film.component'
 import { connect } from 'react-redux'
-import { Fragment, useState } from 'react/cjs/react.development'
+import YouTube from 'react-youtube';
+
+const opts = {
+    height: '400',
+    width: '100%',
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+    },
+  };
 
 const categoryKeyMap = {
     0: "Popular on Netflix",
@@ -15,8 +24,9 @@ const categoryKeyMap = {
     7: "Documentary"
 }
 
-const Category = ({ windowWidth, category, categoryID }) => {
+const Category = ({ windowWidth, category, categoryID, loading, selectedMovie }) => {
     const [ scrollValue , setScrollValue ] = useState(windowWidth)
+    const [ trailerURL, setTrailerURL ] = useState("")
     let scroller = useRef()
 
     const scrollLeft = () => {
@@ -31,10 +41,19 @@ const Category = ({ windowWidth, category, categoryID }) => {
         setScrollValue(windowWidth-25)
     }, [windowWidth])
 
+    useEffect(() => {
+        if(selectedMovie.id===categoryID) {
+            const urlParams = new URLSearchParams(new URL(selectedMovie.url).search)
+            setTrailerURL(urlParams.get("v"))
+        } else {
+            setTrailerURL("")
+        }
+    }, [selectedMovie])
+
     return (
         <Fragment>
             <div className="category__container" style={{
-                visibility: category.length===0 ? "hidden" : "visible"
+                visibility: loading ? "hidden" : "visible"
             }}>
                 <div className="category__title">
                     <h2>{categoryKeyMap[categoryID]}</h2>
@@ -47,7 +66,7 @@ const Category = ({ windowWidth, category, categoryID }) => {
                             {
                                 category ? 
                                 category.map( (film, index) => {
-                                    return <Film id={index} film={film} />
+                                    return <Film key={index} categoryID={categoryID} id={index} film={film} />
                                 })
                                 :
                                 <div>None</div>
@@ -58,12 +77,22 @@ const Category = ({ windowWidth, category, categoryID }) => {
                     </div>
                 </div>
             </div>
+            {   trailerURL ? 
+                <div className="youtube__container">
+                    <div className="youtube__video">
+                        <YouTube videoId={trailerURL} opts={opts} />
+                    </div>
+                </div>
+                : null
+            }
         </Fragment>
     )
 }
 
 const mapStateToProps = state => ({
     windowWidth: state.window.windowWidth,
+    loading: state.film.loading,
+    selectedMovie: state.film.selectedMovie
 })
 
 export default connect(mapStateToProps)(Category)

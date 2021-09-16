@@ -1,11 +1,13 @@
 import { takeLatest, put, all, call, } from "redux-saga/effects";
 import { filmActionTypes } from './film.types'
+import movieTrailer from 'movie-trailer'
 import {
     setBannerData,
     setMovies,
     startLoading,
     fetchDataSuccess,
-    fetchDataFailure
+    fetchDataFailure,
+    setSelectedMovie
 } from './film.actions'
 
 const tmdb = 'https://api.themoviedb.org/3/'
@@ -20,7 +22,6 @@ const requests = {
     animation: `${tmdb}discover/movie?api_key=${apiKey}&with_genres=16&page=5`,
     comedy: `${tmdb}discover/movie?api_key=${apiKey}&with_genres=35&page=6`,
     crime: `${tmdb}discover/movie?api_key=${apiKey}&with_genres=80&page=7`,
-    documentary: `${tmdb}discover/movie?api_key=${apiKey}&with_genres=99&page=6`
 
 }
 //-- https://image.tmdb.org/t/p/original${popular.results[randomNumber].backdrop_path
@@ -31,14 +32,13 @@ export function* fetchDataStartAsync() {
         yield put(startLoading())
         const randomNumber = Math.floor(Math.random() * 20)
 
-        let fetchPopular = fetch(requests.popular)
+        let fetchPopular = fetch(`${requests.popular}&page=${randomNumber}`)
         let fetchTrending = fetch(requests.trending)
         let fetchAction = fetch(requests.action)
         let fetchAdventure = fetch(requests.adventure)
         let fetchAnimation = fetch(requests.animation)
         let fetchComedy = fetch(requests.comedy)
         let fetchCrime = fetch(requests.crime)
-        let fetchDocumentary = fetch(requests.documentary)
 
         let fetchHomepageData = yield Promise.all([
             fetchPopular,
@@ -47,14 +47,13 @@ export function* fetchDataStartAsync() {
             fetchAdventure,
             fetchAnimation,
             fetchComedy,
-            fetchCrime,
-            fetchDocumentary
+            fetchCrime
         ])
 
         let homepageData = yield Promise.all(fetchHomepageData.map( item => {
             return item.json()
         } ))
-
+        console.log("homepageData", homepageData)
         let bannerData = homepageData[0].results[randomNumber]
 
         yield put(setBannerData(bannerData))
@@ -66,14 +65,33 @@ export function* fetchDataStartAsync() {
     }
 }
 
+export function* getSelectedMovieAsync({payload: { title, id }}) {
+    try {
+
+        if(title) {
+            let fetchMovieTrailer = yield movieTrailer(title || "")
+            yield put(setSelectedMovie({ url: fetchMovieTrailer, id: id, title: title }))
+        } else {
+            yield put(setSelectedMovie({ url: '', id: '', title: '' }))
+        }
+
+    } catch(error) {
+
+    }
+}
+
 
 export function* onFetchDataStart(){
     yield takeLatest(filmActionTypes.FETCH_DATA_START, fetchDataStartAsync)
 }
 
+export function* onGetSelectedMovie(){
+    yield takeLatest(filmActionTypes.GET_SELECTED_MOVIE, getSelectedMovieAsync)
+}
 
 export function* filmSagas() {
     yield all([
-        call(onFetchDataStart)
+        call(onFetchDataStart),
+        call(onGetSelectedMovie)
     ])
 }

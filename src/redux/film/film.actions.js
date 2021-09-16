@@ -14,6 +14,16 @@ export const setMovies = films => ({
     payload: films
 })
 
+export const getSelectedMovie = movie => ({
+    type: filmActionTypes.GET_SELECTED_MOVIE,
+    payload: movie
+})
+
+export const setSelectedMovie = movie => ({
+    type: filmActionTypes.SET_SELECTED_MOVIE,
+    payload: movie
+})
+
 export const startLoading = () => ({
     type: filmActionTypes.START_LOADING
 })

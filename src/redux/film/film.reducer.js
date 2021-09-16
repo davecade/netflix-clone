@@ -3,6 +3,7 @@ import { filmActionTypes } from '../film/film.types'
 const INITIAL_STATE = {
     bannerData: [],
     movies: [],
+    selectedMovie: {id: '', title: '', url: ''},
     loading: false,
     error: null
 }
@@ -20,6 +21,11 @@ const filmReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 movies: action.payload
+            }
+        case filmActionTypes.SET_SELECTED_MOVIE:
+            return {
+                ...state,
+                selectedMovie: action.payload
             }
         
         case filmActionTypes.FETCH_DATA_SUCCESS:
