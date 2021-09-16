@@ -1,5 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react'
-import { useEffect } from 'react/cjs/react.development'
+import React, { useState, useRef, useCallback, useEffect } from 'react'
 import './searchbar.styles.scss'
 
 const searchBarOpenStyle = {

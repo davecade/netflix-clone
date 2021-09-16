@@ -39,5 +39,3 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 
-//-- API Key: 08aabbbef104512bb5432031efeae18c
-//-- https://api.themoviedb.org/3/discover/movie?api_key=08aabbbef104512bb5432031efeae18c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate
