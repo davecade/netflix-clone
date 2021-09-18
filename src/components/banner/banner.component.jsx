@@ -46,9 +46,9 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, se
 
     const contentPosition = useMemo(() => {
         if(windowWidth > 2000) {
-            return windowWidth/7
+            return windowWidth/6
         } else {
-            return windowWidth/4
+            return windowWidth/5
         }
         
     }, [windowWidth])

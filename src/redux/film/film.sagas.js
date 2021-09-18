@@ -12,7 +12,7 @@ import {
 
 const tmdb = 'https://api.themoviedb.org/3/'
 const apiKey = '08aabbbef104512bb5432031efeae18c'
-const randomNumber = () => Math.floor(Math.random() * 20)
+const randomNumber = () => Math.floor(Math.random() * 20)+1 // page number must be > 0
 
 const requests = {
     discover: `${tmdb}discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_providers=netflix&with_watch_monetization_types=flatrate`,
@@ -56,7 +56,7 @@ export function* fetchDataStartAsync() {
             return item.json()
         } ))
 
-        let bannerData = homepageData[0].results[randomNumber()]
+        let bannerData = homepageData[0].results[randomNumber()-1]
 
         yield put(setBannerData(bannerData))
         yield put(setMovies(homepageData))
