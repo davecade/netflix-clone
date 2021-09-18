@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import './banner.styles.scss'
 import { getSelectedMovie, setSelectedMovie } from '../../redux/film/film.actions'
 import YouTube from 'react-youtube';
+import { setModalState } from '../../redux/window/window.actions';
 
 
 const opts = {
@@ -15,7 +16,7 @@ const opts = {
 };
 
 
-const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, selectedMovie}) => {
+const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, selectedMovie, setModalState}) => {
     const [ trailerURL, setTrailerURL ] = useState("")
     const image = useRef()
     const { title, overview } = bannerData
@@ -47,7 +48,7 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, se
         if(windowWidth > 2000) {
             return windowWidth/7
         } else {
-            return windowWidth/6
+            return windowWidth/4
         }
         
     }, [windowWidth])
@@ -55,9 +56,7 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, se
     return ( 
         <div className="banner__container">
             <div className="banner__image__container">
-                <img ref={image} className="banner__image" alt="banner" src={`https://image.tmdb.org/t/p/original${bannerData.backdrop_path}`} style={{
-                    width: "100vw",
-                }}></img>
+                <img ref={image} className="banner__image" alt="banner" src={`https://image.tmdb.org/t/p/original${bannerData.backdrop_path}`}></img>
                 <div className="banner__content" style={{
                     top: `${contentPosition}px`,
                     visibility: bannerData.id ? "visible" : "hidden"
@@ -67,15 +66,15 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, se
                         {title}
                     </h1>
 
-                    <p className="banner__overview">
+                    {/* <p className="banner__overview">
                         {overview}
-                    </p>
+                    </p> */}
                     <div className="banner__buttons">
                         <button className="banner__play" onClick={() => handleClick({title: bannerData.title, id: 'banner'})}>
                             <i className={`fas fa-${trailerURL ? "stop" : "play"}`}></i>
                             {trailerURL ? "Stop" : "Play"}
                         </button>
-                        <button className="banner__info">
+                        <button className="banner__info" onClick={() => setModalState(true)}>
                             <i class="fas fa-info-circle"></i>
                             More info
                         </button>
@@ -108,7 +107,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     getSelectedMovie: movie => dispatch(getSelectedMovie(movie)),
-    setSelectedMovie: movie => dispatch(setSelectedMovie(movie))
+    setSelectedMovie: movie => dispatch(setSelectedMovie(movie)),
+    setModalState: state => dispatch(setModalState(state))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Banner)

@@ -3,6 +3,7 @@ import './App.scss';
 import Navbar from './components/navbar/navbar.component'
 import Banner from './components/banner/banner.component'
 import Category from './components/category/category.component'
+import Modal from './components/modal/modal.component'
 import { fetchDataStart } from './redux/film/film.actions'
 import { connect } from 'react-redux';
 
@@ -23,6 +24,7 @@ function App({ fetchDataStart, movies }) {
           <Category categoryID={index} category={category.results} />
         ))
       }
+      <Modal/>
     </div>
   );
 }

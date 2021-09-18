@@ -9,3 +9,8 @@ export const setWindowWidth = width => ({
     type: windowActionTypes.SET_WINDOW_WIDTH,
     payload: width
 })
+
+export const setModalState = state => ({
+    type: windowActionTypes.SET_MODAL_STATE,
+    payload: state
+})

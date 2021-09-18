@@ -87,7 +87,7 @@ const Category = ({ windowWidth, category, categoryID, loading, selectedMovie })
                         <YouTube videoId={trailerURL} opts={opts} />
                     </div>
                 </div>
-                : trailerURL
+                : null
             }
         </Fragment>
     )
