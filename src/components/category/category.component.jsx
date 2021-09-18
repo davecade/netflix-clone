@@ -24,7 +24,7 @@ const categoryKeyMap = {
     7: "Comedy Movies"
 }
 
-const Category = ({ windowWidth, category, categoryID, loading, selectedMovie }) => {
+const Category = ({ windowWidth, category, categoryID, loading, selectedMovie, modalActive }) => {
     const [ scrollValue , setScrollValue ] = useState(windowWidth)
     const [ trailerURL, setTrailerURL ] = useState("")
     let scroller = useRef()
@@ -64,7 +64,9 @@ const Category = ({ windowWidth, category, categoryID, loading, selectedMovie })
                     <h2>{categoryKeyMap[categoryID]}</h2>
                 </div>
                 <div  className="category__content">
-                    <div onClick={scrollLeft} className="scroll__left">
+                    <div onClick={scrollLeft} className="scroll__left" style={{
+                        visibility: modalActive ? 'hidden' : 'visible'
+                    }}>
                         <i class="fas fa-chevron-left"></i>
                     </div>
                         <div ref={scroller} className="category__items">
@@ -76,7 +78,9 @@ const Category = ({ windowWidth, category, categoryID, loading, selectedMovie })
                                 : null
                             }
                         </div>
-                    <div onClick={scrollRight} className="scroll__right">
+                    <div onClick={scrollRight} className="scroll__right" style={{
+                        visibility: modalActive ? 'hidden' : 'visible'
+                    }}>
                         <i class="fas fa-chevron-right"></i>
                     </div>
                 </div>
@@ -96,7 +100,8 @@ const Category = ({ windowWidth, category, categoryID, loading, selectedMovie })
 const mapStateToProps = state => ({
     windowWidth: state.window.windowWidth,
     loading: state.film.loading,
-    selectedMovie: state.film.selectedMovie
+    selectedMovie: state.film.selectedMovie,
+    modalActive: state.window.modalActive
 })
 
 export default connect(mapStateToProps)(Category)

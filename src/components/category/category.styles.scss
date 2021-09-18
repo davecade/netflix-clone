@@ -55,9 +55,8 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                z-index: 10;
                 transition: opacity .5s;
-
+                z-index: 1;
     
     
                 &:hover {
@@ -96,12 +95,13 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                z-index: 10;
                 transition: opacity .5s;
-    
+                z-index: 1;
+                
                 &:hover {
                     cursor: pointer;
                     background-color: rgba(0, 0, 0, .5);
+                    z-index: 1;
                 }
     
                 .fas.fa-chevron-right{

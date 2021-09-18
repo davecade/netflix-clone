@@ -19,7 +19,7 @@ const opts = {
 const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, selectedMovie, setModalState}) => {
     const [ trailerURL, setTrailerURL ] = useState("")
     const image = useRef()
-    const { title, overview } = bannerData
+    const { title } = bannerData
 
     const handleClick = async movie => {
 
@@ -65,10 +65,6 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, se
                     <h1 className="banner__title">
                         {title}
                     </h1>
-
-                    {/* <p className="banner__overview">
-                        {overview}
-                    </p> */}
                     <div className="banner__buttons">
                         <button className="banner__play" onClick={() => handleClick({title: bannerData.title, id: 'banner'})}>
                             <i className={`fas fa-${trailerURL ? "stop" : "play"}`}></i>

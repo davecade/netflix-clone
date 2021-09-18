@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getSelectedMovie } from '../../redux/film/film.actions'
+import { getSelectedMovie, setBannerData } from '../../redux/film/film.actions'
 import './film.styles.scss'
 
-const Film = ({film, getSelectedMovie , categoryID, selectedMovie }) => {
+const Film = ({film, getSelectedMovie , categoryID, selectedMovie, setBannerData }) => {
 
     const handleClick = movie => {
 
@@ -11,9 +11,9 @@ const Film = ({film, getSelectedMovie , categoryID, selectedMovie }) => {
             getSelectedMovie({id: '', title: ''})
         } else {
             getSelectedMovie(movie)
+            setBannerData(film)
         }
         
-
     }
 
     return (
@@ -29,7 +29,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    getSelectedMovie: movie => dispatch(getSelectedMovie(movie))
+    getSelectedMovie: movie => dispatch(getSelectedMovie(movie)),
+    setBannerData: film => dispatch(setBannerData(film))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Film);
