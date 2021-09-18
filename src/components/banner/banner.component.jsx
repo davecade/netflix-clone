@@ -6,20 +6,20 @@ import YouTube from 'react-youtube';
 import { setModalState } from '../../redux/window/window.actions';
 
 
-const opts = {
-    height: `400`,
-    width: '100%',
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
-    },
-};
-
 
 const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, selectedMovie, setModalState}) => {
     const [ trailerURL, setTrailerURL ] = useState("")
     const image = useRef()
     const { title } = bannerData
+
+    const opts = {
+        height: windowWidth > 1800 ? `800` : `400`,
+        width: '100%',
+        playerVars: {
+          // https://developers.google.com/youtube/player_parameters
+          autoplay: 1,
+        },
+    };
 
     const handleClick = async movie => {
 
