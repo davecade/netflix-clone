@@ -66,7 +66,7 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, se
                         {title}
                     </h1>
                     <div className="banner__buttons">
-                        <button className="banner__play" onClick={() => handleClick({title: bannerData.title, id: 'banner'})}>
+                        <button className="banner__play" onClick={() => handleClick({title: bannerData.title, id: 'banner', movieID: bannerData.id})}>
                             <i className={`fas fa-${trailerURL ? "stop" : "play"}`}></i>
                             {trailerURL ? "Stop" : "Play"}
                         </button>
