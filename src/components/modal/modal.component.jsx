@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment, useState, useEffect, useRef, useCallback } from 'react'
 import { connect } from 'react-redux'
 import { setModalState } from '../../redux/window/window.actions'
 import './modal.styles.scss'
@@ -7,27 +7,50 @@ const Modal = ({ modalActive, bannerData, setModalState }) => {
     const [ visibility, setVisibility ] = useState("hidden")
     const [ opacity, setOpacity ] = useState("0")
     const [ top, setTop ] = useState("4%")
-    const { title, overview, release_date, vote_average } = bannerData
+    const { title, overview, release_date, vote_average, genres } = bannerData
+    const modalEl = useRef()
+
+    const handleClick = useCallback( e => {
+        if(modalActive && e.target.classList[0].slice(0,5) !== modalEl.current.classList[0].slice(0,5)) {
+            setModalState(false)
+        }
+    }, [modalActive, setModalState])
+
+    const handleKeyDown = useCallback( e => {
+        if(modalActive && e.key==='Escape') {
+            setModalState(false)
+        }
+    }, [modalActive, setModalState])
 
     useEffect(() => {
         if(modalActive) {
             setVisibility("visible")
             setOpacity('1')
-            setTop('8.5%')
+            setTop('5.5%')
         } else {
             setVisibility("hidden")
             setOpacity('0')
-            setTop('4%')
+            setTop('2%')
         }
-    }, [modalActive])
+
+        if(modalActive) {
+            document.addEventListener('click', handleClick);
+            document.addEventListener('keydown', handleKeyDown);
+            return () => {
+                document.removeEventListener('click', handleClick);
+                document.removeEventListener('keydown', handleKeyDown);
+            };
+        }
+    }, [modalActive, handleClick, handleKeyDown])
+
 
     return (
         <Fragment>
-            <div className="modal__background" style={{
+            <div className="_modal__background" style={{
                 visibility: visibility,
                 opacity: opacity,
             }}>
-                <div className="modal" style={{
+                <div ref={modalEl} className="modal" style={{
                     visibility: visibility,
                     opacity: opacity,
                     top: top
@@ -48,11 +71,13 @@ const Modal = ({ modalActive, bannerData, setModalState }) => {
                                 {title}
                             </h1>
                             <p className="modal__date__rating">
-                                {release_date ? release_date.slice(0,4) : null} {vote_average ? `- Rating ${(vote_average/10)*100}%` : null}
+                                {release_date ? release_date.slice(0,4) : null}
+                                {vote_average ? ` - Rating ${Math.floor((vote_average/10)*100)}%` : null}
                             </p>
-                            <p className="modal__overview">
-                                {overview}
+                            <p className="modal__genres">
+                                {genres ? `Genres: ${genres.map(item => ` ${item.name}`)}`: null}
                             </p>
+                            <p className="modal__overview">{overview}</p>
                         </div>
 
                     </div>

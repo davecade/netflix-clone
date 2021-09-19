@@ -1,4 +1,4 @@
-.modal__background {
+._modal__background {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -23,12 +23,14 @@
     .modal {
         width: 97%;
         max-width: 1500px;
-        height: 1000px;
+        min-height: 1000px;
+        height: fit-content;
         transition: all .5s ease-out;
         position: fixed;
         background-color: #131312;
         border-radius: 1rem;
         z-index: 20;
+        
 
         @media(max-width: 1000px) {
             height: 600px;
@@ -40,6 +42,7 @@
         }
 
         .modal__content {
+            padding-bottom: 1rem;
 
             .modal__image__container {
                 width: 100%;
@@ -125,8 +128,15 @@
                     font-weight: 700;
                 }
 
-                .modal__overview {
+                .modal__genres {
+                    margin-bottom: 1rem;
                     font-size: 1.5rem;
+                    color: white;
+                    font-weight: 700;
+                }
+
+                .modal__overview {
+                    font-size: 1.4rem;
                 }
 
 

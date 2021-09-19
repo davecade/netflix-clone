@@ -56,7 +56,8 @@ export function* fetchDataStartAsync() {
             return item.json()
         } ))
 
-        let bannerData = homepageData[0].results[randomNumber()-1]
+        let fetchBannerData = yield fetch(`https://api.themoviedb.org/3/movie/${homepageData[0].results[randomNumber()-1].id}?api_key=${apiKey}&language=en-US`)
+        let bannerData = yield fetchBannerData.json()
 
         yield put(setBannerData(bannerData))
         yield put(setMovies(homepageData))
@@ -67,12 +68,15 @@ export function* fetchDataStartAsync() {
     }
 }
 
-export function* getSelectedMovieAsync({payload: { title, id }}) {
+export function* getSelectedMovieAsync({payload: { title, id, movieID }}) {
     try {
 
         if(title) {
             let fetchMovieTrailer = yield movieTrailer(title || "")
+            let fetchBannerData = yield fetch(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${apiKey}&language=en-US`)
+            let bannerData = yield fetchBannerData.json()
             yield put(setSelectedMovie({ url: fetchMovieTrailer, id: id, title: title }))
+            yield put(setBannerData(bannerData))
         } else {
             yield put(setSelectedMovie({ url: '', id: '', title: '' }))
         }
