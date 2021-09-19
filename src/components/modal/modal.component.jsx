@@ -7,7 +7,7 @@ const Modal = ({ modalActive, bannerData, setModalState }) => {
     const [ visibility, setVisibility ] = useState("hidden")
     const [ opacity, setOpacity ] = useState("0")
     const [ top, setTop ] = useState("4%")
-    const { title, overview } = bannerData
+    const { title, overview, release_date, vote_average } = bannerData
 
     useEffect(() => {
         if(modalActive) {
@@ -47,6 +47,9 @@ const Modal = ({ modalActive, bannerData, setModalState }) => {
                             <h1 className="modal__image__title">
                                 {title}
                             </h1>
+                            <p className="modal__date__rating">
+                                {release_date ? release_date.slice(0,4) : null} {vote_average ? `- Rating ${(vote_average/10)*100}%` : null}
+                            </p>
                             <p className="modal__overview">
                                 {overview}
                             </p>

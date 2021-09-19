@@ -110,17 +110,26 @@
                 border: none;
             }
             .modal__info {
+                color: white;
                 padding: 0 5rem;
 
                 .modal__image__title {
-                    color: white;
                     font-size: 2.5rem;
                     margin-bottom: 1rem;
                 }
 
-                .modal__overview {
-                    color: white;
+                .modal__date__rating {
+                    margin-bottom: 1rem;
+                    font-size: 1.5rem;
+                    color: lightgreen;
+                    font-weight: 700;
                 }
+
+                .modal__overview {
+                    font-size: 1.5rem;
+                }
+
+
             }
 
         }
