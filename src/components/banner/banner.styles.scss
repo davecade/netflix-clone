@@ -130,5 +130,30 @@
             transform: translateY(-100px);
             border: none;
         }
+        
+        .youtube__container {
+          margin: 0 2rem;
+          .youtube__video {
+              position: relative;
+              top: -3.5rem;
+              height: 400px;
+      
+      
+              @media(min-width: 2000px) {
+                  top: -10.5rem;
+                  height: 600px;
+              }
+      
+              @media(min-width: 2200px) {
+                  top: -15rem;
+                  height: 800px;
+              }
+      
+              @media(min-width: 2400px) {
+                  top: -25rem;
+                  height: 900px;
+              }
+          }
+      }
 
   }

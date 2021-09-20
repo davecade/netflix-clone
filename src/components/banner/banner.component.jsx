@@ -5,21 +5,18 @@ import { getSelectedMovie, setSelectedMovie } from '../../redux/film/film.action
 import YouTube from 'react-youtube';
 import { setModalState } from '../../redux/window/window.actions';
 
-
+const opts = {
+    width: '100%',
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+    },
+};
 
 const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, selectedMovie, setModalState}) => {
     const [ trailerURL, setTrailerURL ] = useState("")
     const image = useRef()
     const { title } = bannerData
-
-    const opts = {
-        height: windowWidth > 1800 ? `800` : `400`,
-        width: '100%',
-        playerVars: {
-          // https://developers.google.com/youtube/player_parameters
-          autoplay: 1,
-        },
-    };
 
     const handleClick = async movie => {
 
@@ -81,9 +78,7 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, se
             {
                 trailerURL ?
                 <div className="youtube__container">
-                    <div className="youtube__video">
-                        <YouTube videoId={trailerURL} opts={opts} />
-                    </div>
+                        <YouTube className={"youtube__video"} videoId={trailerURL} opts={opts} />
                 </div>
                 :
                 null

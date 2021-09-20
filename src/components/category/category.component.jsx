@@ -40,15 +40,6 @@ const Category = ({ windowWidth, category, categoryID, loading, selectedMovie, m
 
     useEffect(() => {
         setScrollValue(windowWidth-200)
-
-        // if(windowWidth > 1800) {
-        //     setYoutubHeight(`800`)
-        // } else if(windowWidth > 1600) {
-        //     setYoutubHeight(`600`)
-        // } else {
-        //     setYoutubHeight(`400`)
-        // }
-
     }, [windowWidth])
 
     useEffect(() => {
