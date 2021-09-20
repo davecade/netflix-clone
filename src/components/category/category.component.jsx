@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useEffect, useState, useCallback, useMemo } from 'react'
+import React, { Fragment, useRef, useEffect, useState, useCallback } from 'react'
 import './category.styles.scss'
 import Film from '../film/film.component'
 import { connect } from 'react-redux'
@@ -17,10 +17,17 @@ const categoryKeyMap = {
     7: "Comedy Movies"
 }
 
+const opts = {
+    width: '100%',
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+    },
+};
+
 const Category = ({ windowWidth, category, categoryID, loading, selectedMovie, modalActive }) => {
     const [ scrollValue , setScrollValue ] = useState(windowWidth)
     const [ trailerURL, setTrailerURL ] = useState("")
-    const [ youtubeHeight, setYoutubHeight ] = useState('400')
     let scroller = useRef()
 
     const scrollLeft = useCallback(() => {
@@ -31,25 +38,16 @@ const Category = ({ windowWidth, category, categoryID, loading, selectedMovie, m
         scroller.current.scrollLeft +=scrollValue
     }, [scrollValue])
 
-    const opts = useMemo(() => ({
-        height: youtubeHeight,
-        width: '100%',
-        playerVars: {
-          // https://developers.google.com/youtube/player_parameters
-          autoplay: 1,
-        },
-    }), [youtubeHeight]);
-
     useEffect(() => {
         setScrollValue(windowWidth-200)
 
-        if(windowWidth > 1800) {
-            setYoutubHeight(`800`)
-        } else if(windowWidth > 1600) {
-            setYoutubHeight(`600`)
-        } else {
-            setYoutubHeight(`400`)
-        }
+        // if(windowWidth > 1800) {
+        //     setYoutubHeight(`800`)
+        // } else if(windowWidth > 1600) {
+        //     setYoutubHeight(`600`)
+        // } else {
+        //     setYoutubHeight(`400`)
+        // }
 
     }, [windowWidth])
 
@@ -99,9 +97,7 @@ const Category = ({ windowWidth, category, categoryID, loading, selectedMovie, m
             </div>
             {   trailerURL ? 
                 <div className="youtube__container">
-                    <div className="youtube__video">
-                        <YouTube videoId={trailerURL} opts={opts} />
-                    </div>
+                    <YouTube className={"youtube__video"} videoId={trailerURL} opts={opts} />
                 </div>
                 : null
             }
