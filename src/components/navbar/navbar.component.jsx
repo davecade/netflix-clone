@@ -15,7 +15,7 @@ const navBarSolid = {
     //--#131312
 }
 
-const Navbar = ({setWindowWidth, setWindowHeight,  windowWidth }) => {
+const Navbar = ({setWindowWidth, setWindowHeight,  windowWidth, searchBarOpen }) => {
     const [ offset, setOffset ] = useState(0);
     const [ background, setBackground ] = useState({})
     const [ dropdownState, setDropdownState ] = useState(false)
@@ -62,7 +62,7 @@ const Navbar = ({setWindowWidth, setWindowHeight,  windowWidth }) => {
                     <h1 className="navbar__title">NETFLIX</h1>
 
                     {
-                        windowWidth < 1485 ?
+                        windowWidth < 1485 && searchBarOpen ?
                         <div className="navbar__browse"
                             onMouseEnter={handleBrowseMouseEnter}
                             onMouseLeave={handleBrowseMouseLeave}
@@ -97,7 +97,8 @@ const Navbar = ({setWindowWidth, setWindowHeight,  windowWidth }) => {
 
 const mapStateToProps = state => ({
     windowWidth: state.window.windowWidth,
-    windowHeight: state.window.windowHeight
+    windowHeight: state.window.windowHeight,
+    searchBarOpen: state.window.searchBarActive
 })
 
 const mapDispatchToProps = dispatch => ({

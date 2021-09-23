@@ -23,6 +23,10 @@
             .navbar__title{
                 margin: auto 0;
                 color: #e50914;
+
+                &:hover {
+                    cursor: pointer;
+                }
             }
     
             .navbar__browse {
@@ -52,7 +56,7 @@
                 align-items: center;
                 color: #e5e5e5;
                 margin-left: 2rem;
-    
+                
             }
         }
 

@@ -3,7 +3,8 @@ import { windowActionTypes } from '../window/window.types'
 const INITIAL_STATE = {
     windowHeight: 0,
     windowWidth: 0,
-    modalActive: false
+    modalActive: false,
+    searchBarActive: false
 }
 
 const windowReducer = (state = INITIAL_STATE, action) => {
@@ -25,6 +26,11 @@ const windowReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 modalActive: action.payload
+            }
+        case windowActionTypes.SET_SEARCHBAR_STATE:
+            return {
+                ...state,
+                searchBarActive: action.payload
             }
 
         default:

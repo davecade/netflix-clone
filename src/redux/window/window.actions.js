@@ -14,3 +14,8 @@ export const setModalState = state => ({
     type: windowActionTypes.SET_MODAL_STATE,
     payload: state
 })
+
+export const setSearchBarState = state => ({
+    type: windowActionTypes.SET_SEARCHBAR_STATE,
+    payload: state
+})

@@ -1,5 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react'
+import { connect } from 'react-redux'
 import './searchbar.styles.scss'
+import { setSearchBarState } from '../../redux/window/window.actions'
 
 const searchBarOpenStyle = {
     width: "29rem"
@@ -12,8 +14,7 @@ const searchBarClosedStyle = {
 }
 
 
-const Searchbar = ({ placeholder }) => {
-    const [ searchBarOpen, setSearchBarOpen ] = useState(false)
+const Searchbar = ({ placeholder, searchBarOpen, setSearchBarOpen }) => {
     const [ searchBarStyles , setSearchBarStyles ] = useState(searchBarClosedStyle)
     const [ searchBarValue, setSearchBarValue ] = useState("")
     const searchbarEl = useRef()
@@ -63,4 +64,13 @@ const Searchbar = ({ placeholder }) => {
     )
 }
 
-export default Searchbar
+
+const mapStateToProps = state => ({
+    searchBarOpen: state.window.searchBarActive
+})
+
+const mapDispatchToProps = dispatch => ({
+    setSearchBarOpen: status => dispatch(setSearchBarState(status))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Searchbar)

@@ -5,6 +5,8 @@ import { getSelectedMovie, setSelectedMovie } from '../../redux/film/film.action
 import YouTube from 'react-youtube';
 import { setModalState } from '../../redux/window/window.actions';
 
+
+//-- Youtube component options
 const opts = {
     width: '100%',
     playerVars: {

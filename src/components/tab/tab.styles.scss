@@ -1,8 +1,16 @@
 .navbar__tab {
     margin: 0 1rem;
-    font-size: 1rem;
+    font-size: .9rem;
     transition-property: opacity;
     transition-duration: .5s;
+
+    @media(min-width: 1500px) {
+        font-size: 1rem;
+    }
+
+    @media(min-width: 2000px) {
+        font-size: 1.2rem;
+    }
 
     &:hover {
         opacity: 0.7;
