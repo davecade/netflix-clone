@@ -53,7 +53,9 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, se
     }, [windowWidth])
 
     return ( 
-        <div className="banner__container">
+        <div className="banner__container" style={{
+            minHeight: windowWidth > 2000 ? "70rem" : ""
+        }}>
             <div className="banner__image__container">
                 <img ref={image} className="banner__image" alt="banner" src={`https://image.tmdb.org/t/p/original${bannerData.backdrop_path}`}></img>
                 <div className="banner__content" style={{

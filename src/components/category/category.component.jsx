@@ -65,9 +65,7 @@ const Category = ({ windowWidth, category, categoryID, loading, selectedMovie, m
                     <h2>{categoryKeyMap[categoryID]}</h2>
                 </div>
                 <div  className="category__content">
-                    <div onClick={scrollLeft} className="scroll__left" style={{
-                        visibility: modalActive ? 'hidden' : 'visible'
-                    }}>
+                    <div onClick={scrollLeft} className="scroll__left" >
                         <i class="fas fa-chevron-left"></i>
                     </div>
                         <div ref={scroller} className="category__items">
@@ -79,9 +77,7 @@ const Category = ({ windowWidth, category, categoryID, loading, selectedMovie, m
                                 : null
                             }
                         </div>
-                    <div onClick={scrollRight} className="scroll__right" style={{
-                        visibility: modalActive ? 'hidden' : 'visible'
-                    }}>
+                    <div onClick={scrollRight} className="scroll__right">
                         <i class="fas fa-chevron-right"></i>
                     </div>
                 </div>
