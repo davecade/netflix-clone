@@ -58,7 +58,7 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, se
     }, [windowWidth])
 
 
-    const styles = useMemo(() => ({
+    const inlineStyles = useMemo(() => ({
         bannerContainer: {
             minHeight: windowWidth > 2000 ? "70rem" : ""
         },
@@ -69,10 +69,10 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, se
     }), [windowWidth, bannerData, contentPosition])
 
     return ( 
-        <div className="banner__container" style={styles.bannerContainer}>
+        <div className="banner__container" style={inlineStyles.bannerContainer}>
             <div className="banner__image__container">
                 <img ref={image} className="banner__image" alt="banner" src={`https://image.tmdb.org/t/p/original${bannerData.backdrop_path}`}></img>
-                <div className="banner__content" style={styles.bannerContent}>
+                <div className="banner__content" style={inlineStyles.bannerContent}>
 
                     <h1 className="banner__title">
                         {title}
