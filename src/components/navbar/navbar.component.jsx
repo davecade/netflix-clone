@@ -77,7 +77,7 @@ const Navbar = ({setWindowWidth, setWindowHeight,  windowWidth, searchBarOpen })
                     <h1 className="navbar__title">NETFLIX</h1>
 
                     {
-                        windowWidth < 1485 && searchBarOpen ?
+                        (windowWidth < 1485 && searchBarOpen) || (windowWidth < 1100) ?
                         <div className="navbar__browse"
                             onMouseEnter={handleBrowseMouseEnter}
                             onMouseLeave={handleBrowseMouseLeave}
