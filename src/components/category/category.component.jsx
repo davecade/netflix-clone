@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useEffect, useState, useCallback } from 'react'
+import React, { Fragment, useRef, useEffect, useState, useCallback, useMemo } from 'react'
 import './category.styles.scss'
 import Film from '../film/film.component'
 import { connect } from 'react-redux'
@@ -25,7 +25,7 @@ const opts = {
     },
 };
 
-const Category = ({ windowWidth, category, categoryID, loading, selectedMovie, modalActive }) => {
+const Category = ({ windowWidth, category, categoryID, loading, selectedMovie }) => {
     const [ scrollValue , setScrollValue ] = useState(windowWidth)
     const [ trailerURL, setTrailerURL ] = useState("")
     let scroller = useRef()
@@ -56,11 +56,15 @@ const Category = ({ windowWidth, category, categoryID, loading, selectedMovie, m
         }
     }, [selectedMovie, categoryID])
 
+    const inlineStyles = useMemo(() => ({
+        categoryContainer: {
+            visibility: loading ? "hidden" : "visible"
+        }
+    }), [loading])
+
     return (
         <Fragment>
-            <div className="category__container" style={{
-                visibility: loading ? "hidden" : "visible"
-            }}>
+            <div className="category__container" style={inlineStyles.categoryContainer}>
                 <div className="category__title">
                     <h2>{categoryKeyMap[categoryID]}</h2>
                 </div>
@@ -96,7 +100,6 @@ const mapStateToProps = state => ({
     windowWidth: state.window.windowWidth,
     loading: state.film.loading,
     selectedMovie: state.film.selectedMovie,
-    modalActive: state.window.modalActive
 })
 
 export default connect(mapStateToProps)(Category)

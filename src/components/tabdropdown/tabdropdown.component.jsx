@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import Tab from '../tab/tab.component'
 import './tabdropdown.styles.scss'
 
@@ -17,10 +17,14 @@ const Tabdropdown = ({ dropdownState }) => {
         setVisibility(false)
     }
 
-    return (
-        <div className="tabdropdown__container" style={{
+    const inlineStyles = useMemo(() => ({
+        tabDropdownContainer: {
             visibility: visibility ? "visible" : "hidden"
-        }}
+        }
+    }))
+
+    return (
+        <div className="tabdropdown__container" style={inlineStyles.tabDropdownContainer}
             onMouseEnter={handleBrowseMouseEnter}
             onMouseLeave={handleBrowseMouseLeave}
         >

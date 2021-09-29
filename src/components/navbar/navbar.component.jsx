@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback , useLayoutEffect} from 'react';
+import React, { useEffect, useState, useCallback , useLayoutEffect, useMemo} from 'react';
 import Tab from '../tab/tab.component'
 import Searchbar from '../searchbar/searchbar.component'
 import Tabdropdown from '../tabdropdown/tabdropdown.component'
@@ -70,6 +70,13 @@ const Navbar = ({setWindowWidth, setWindowHeight,  windowWidth, searchBarOpen })
         setDropdownState(false)
     }
 
+    const inlineStyles = useMemo(() => ({
+        navbarTabs: {
+            opacity: tabsOpacity,
+            visibility: tabsVisibility
+        }
+    }), [tabsOpacity, tabsVisibility])
+
     return (
         <div className="navbar" style={background}>
             <div className="navbar__content">
@@ -86,10 +93,7 @@ const Navbar = ({setWindowWidth, setWindowHeight,  windowWidth, searchBarOpen })
                             <i className="fas fa-sort-down"></i>
                         </div>
                         :
-                        <div className="navbar__tabs" style={{
-                            opacity: tabsOpacity,
-                            visibility: tabsVisibility
-                        }}>
+                        <div className="navbar__tabs" style={inlineStyles.navbarTabs}>
                             <Tab className={"navbar__tab"} title={"Home"} />
                             <Tab className={"navbar__tab"} title={"TV Shows"} />
                             <Tab className={"navbar__tab"} title={"Movies"} />

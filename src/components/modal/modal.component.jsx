@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useRef, useCallback } from 'react'
+import React, { Fragment, useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { connect } from 'react-redux'
 import { setModalState } from '../../redux/window/window.actions'
 import './modal.styles.scss'
@@ -43,18 +43,22 @@ const Modal = ({ modalActive, bannerData, setModalState }) => {
         }
     }, [modalActive, handleClick, handleKeyDown])
 
+    const inlineStyles = useMemo(() => ({
+        modalBackground: {
+            visibility: visibility,
+            opacity: opacity,
+        },
+        modal: {
+            visibility: visibility,
+            opacity: opacity,
+            top: top
+        }
+    }), [visibility, opacity, top])
 
     return (
         <Fragment>
-            <div className="_modal__background" style={{
-                visibility: visibility,
-                opacity: opacity,
-            }}>
-                <div ref={modalEl} className="modal" style={{
-                    visibility: visibility,
-                    opacity: opacity,
-                    top: top
-                }}>
+            <div className="_modal__background" style={inlineStyles.modalBackground}>
+                <div ref={modalEl} className="modal" style={inlineStyles.modal}>
                     <div className="modal__content">
                         <div className="modal__image__container">
                             <img className="modal__image" alt="poster" src={`https://image.tmdb.org/t/p/original${bannerData.backdrop_path}`}></img>
