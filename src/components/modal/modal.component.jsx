@@ -8,7 +8,13 @@ const Modal = ({ modalActive, bannerData, setModalState }) => {
     const [ opacity, setOpacity ] = useState("0")
     const [ top, setTop ] = useState("4%")
     const { title, overview, release_date, vote_average, genres } = bannerData
+    const [ bannerHeight, setBannerHeight ] = useState("0")
     const modalEl = useRef()
+    const bannerImage = useRef()
+
+    useEffect(() => {
+        setBannerHeight(bannerImage.current.height)
+    }, [bannerImage])
 
     const handleClick = useCallback( e => {
         if(modalActive && e.target.classList[0].slice(0,5) !== modalEl.current.classList[0].slice(0,5)) {
@@ -26,7 +32,7 @@ const Modal = ({ modalActive, bannerData, setModalState }) => {
         if(modalActive) {
             setVisibility("visible")
             setOpacity('1')
-            setTop('5.5%')
+            setTop('0')
         } else {
             setVisibility("hidden")
             setOpacity('0')
@@ -52,8 +58,12 @@ const Modal = ({ modalActive, bannerData, setModalState }) => {
             visibility: visibility,
             opacity: opacity,
             top: top
+        },
+        bottomBlur: {
+            height: bannerHeight*.30,
+            transform: `translateY(${bannerHeight*.30})`
         }
-    }), [visibility, opacity, top])
+    }), [visibility, opacity, top, bannerHeight])
 
     return (
         <Fragment>
@@ -61,7 +71,7 @@ const Modal = ({ modalActive, bannerData, setModalState }) => {
                 <div ref={modalEl} className="modal" style={inlineStyles.modal}>
                     <div className="modal__content">
                         <div className="modal__image__container">
-                            <img className="modal__image" alt="poster" src={`https://image.tmdb.org/t/p/original${bannerData.backdrop_path}`}></img>
+                            <img ref={bannerImage} className="modal__image" alt="poster" src={`https://image.tmdb.org/t/p/original${bannerData.backdrop_path}`}></img>
                             <div className="modal__image__content">
                             </div>
                             <div className="close__button" onClick={() => setModalState(false)}>
@@ -69,7 +79,7 @@ const Modal = ({ modalActive, bannerData, setModalState }) => {
                                 <div className="line__two"></div>
                             </div>
                         </div>
-                        <div className="modal__bottom__blur"></div>
+                        <div className="modal__bottom__blur" style={inlineStyles.bottomBlur}></div>
                         <div className="modal__info">
                             <h1 className="modal__image__title">
                                 {title}
