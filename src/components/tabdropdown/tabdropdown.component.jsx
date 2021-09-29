@@ -21,7 +21,7 @@ const Tabdropdown = ({ dropdownState }) => {
         tabDropdownContainer: {
             visibility: visibility ? "visible" : "hidden"
         }
-    }))
+    }), [visibility])
 
     return (
         <div className="tabdropdown__container" style={inlineStyles.tabDropdownContainer}

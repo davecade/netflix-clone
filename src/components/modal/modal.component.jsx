@@ -12,9 +12,10 @@ const Modal = ({ modalActive, bannerData, setModalState }) => {
     const modalEl = useRef()
     const bannerImage = useRef()
 
-    useEffect(() => {
+    // eslint-disable-next-line
+    useEffect(() => { 
         setBannerHeight(bannerImage.current.height)
-    }, [bannerImage])
+    })
 
     const handleClick = useCallback( e => {
         if(modalActive && e.target.classList[0].slice(0,5) !== modalEl.current.classList[0].slice(0,5)) {
@@ -32,11 +33,11 @@ const Modal = ({ modalActive, bannerData, setModalState }) => {
         if(modalActive) {
             setVisibility("visible")
             setOpacity('1')
-            setTop('0')
+            setTop('4.5%')
         } else {
             setVisibility("hidden")
             setOpacity('0')
-            setTop('2%')
+            setTop('0%')
         }
 
         if(modalActive) {
@@ -61,7 +62,7 @@ const Modal = ({ modalActive, bannerData, setModalState }) => {
         },
         bottomBlur: {
             height: bannerHeight*.30,
-            transform: `translateY(${bannerHeight*.30})`
+            transform: `translateY(-${bannerHeight*.30}px)`
         }
     }), [visibility, opacity, top, bannerHeight])
 
