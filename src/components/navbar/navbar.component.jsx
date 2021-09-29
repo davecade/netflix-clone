@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback , useLayoutEffect} from 'react';
 import Tab from '../tab/tab.component'
 import Searchbar from '../searchbar/searchbar.component'
 import Tabdropdown from '../tabdropdown/tabdropdown.component'
@@ -19,6 +19,8 @@ const Navbar = ({setWindowWidth, setWindowHeight,  windowWidth, searchBarOpen })
     const [ offset, setOffset ] = useState(0);
     const [ background, setBackground ] = useState({})
     const [ dropdownState, setDropdownState ] = useState(false)
+    const [ navbarOpacity, setNavbarOpacity ] = useState(0)
+    const [ tabsVisibility, setTabsVisibility ] = useState('hidden')
 
     const handleScroll = useCallback(() => {
         if(offset > 20) {
@@ -27,6 +29,19 @@ const Navbar = ({setWindowWidth, setWindowHeight,  windowWidth, searchBarOpen })
             setBackground(navBarTransparent)
         }
     }, [offset])
+
+    useLayoutEffect(() => {
+        if(windowWidth < 1485 && searchBarOpen) {
+            setNavbarOpacity(0)
+            setTabsVisibility("hidden")
+        } else {
+            setTimeout(() => {
+                setNavbarOpacity(1)
+                setTabsVisibility("visible")
+            }, 200)
+        }
+
+    }, [searchBarOpen, windowWidth])
 
     useEffect(() => {
         setWindowWidth(window.innerWidth)
@@ -71,7 +86,10 @@ const Navbar = ({setWindowWidth, setWindowHeight,  windowWidth, searchBarOpen })
                             <i className="fas fa-sort-down"></i>
                         </div>
                         :
-                        <div className="navbar__tabs">
+                        <div className="navbar__tabs" style={{
+                            opacity: navbarOpacity,
+                            visibility: tabsVisibility
+                        }}>
                             <Tab className={"navbar__tab"} title={"Home"} />
                             <Tab className={"navbar__tab"} title={"TV Shows"} />
                             <Tab className={"navbar__tab"} title={"Movies"} />
