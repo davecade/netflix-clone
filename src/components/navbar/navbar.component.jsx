@@ -19,7 +19,7 @@ const Navbar = ({setWindowWidth, setWindowHeight,  windowWidth, searchBarOpen })
     const [ offset, setOffset ] = useState(0);
     const [ background, setBackground ] = useState({})
     const [ dropdownState, setDropdownState ] = useState(false)
-    const [ navbarOpacity, setNavbarOpacity ] = useState(0)
+    const [ tabsOpacity, setTabsOpacity ] = useState(0)
     const [ tabsVisibility, setTabsVisibility ] = useState('hidden')
 
     const handleScroll = useCallback(() => {
@@ -32,11 +32,11 @@ const Navbar = ({setWindowWidth, setWindowHeight,  windowWidth, searchBarOpen })
 
     useLayoutEffect(() => {
         if(windowWidth < 1485 && searchBarOpen) {
-            setNavbarOpacity(0)
+            setTabsOpacity(0)
             setTabsVisibility("hidden")
         } else {
             setTimeout(() => {
-                setNavbarOpacity(1)
+                setTabsOpacity(1)
                 setTabsVisibility("visible")
             }, 200)
         }
@@ -87,7 +87,7 @@ const Navbar = ({setWindowWidth, setWindowHeight,  windowWidth, searchBarOpen })
                         </div>
                         :
                         <div className="navbar__tabs" style={{
-                            opacity: navbarOpacity,
+                            opacity: tabsOpacity,
                             visibility: tabsVisibility
                         }}>
                             <Tab className={"navbar__tab"} title={"Home"} />
