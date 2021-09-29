@@ -10,7 +10,6 @@ const Film = ({film, getSelectedMovie , categoryID, selectedMovie }) => {
         if(selectedMovie.title === movie.title) {
             getSelectedMovie({id: '', title: '', movieID: ''})
         } else {
-            console.log("SELECTED", selectedMovie)
             getSelectedMovie(movie)
         }
         

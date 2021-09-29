@@ -15,7 +15,6 @@ function App({ fetchDataStart, movies }) {
     let api = '08aabbbef104512bb5432031efeae18c'
     let fetchMovie = await fetch(`https://api.themoviedb.org/3/movie/198663?api_key=${api}&language=en-US`)
     let movie = await fetchMovie.json()
-    console.log("MOVIE: ", movie)
   })()
 
   useEffect(() => {
