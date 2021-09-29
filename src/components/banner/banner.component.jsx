@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useMemo } from 'react';
+import React, { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 import { connect } from 'react-redux'
 import './banner.styles.scss'
 import { getSelectedMovie, setSelectedMovie } from '../../redux/film/film.actions'
@@ -20,8 +20,13 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, se
     const image = useRef()
     const { title } = bannerData
 
-    const handleClick = async movie => {
+    const movieDetails = useMemo(() => ({
+        title: bannerData.title,
+        id: 'banner',
+        movieID: bannerData.id
+    }), [bannerData])
 
+    const handleClick = async movie => {
         if(selectedMovie.id==='banner') {
             await setSelectedMovie({ url: '', id: '', title: '' })
             setTrailerURL("")
@@ -43,7 +48,7 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, se
         }
     }, [selectedMovie])
 
-    const contentPosition = useMemo(() => {
+    const contentPosition = useCallback(() => {
         if(windowWidth > 2000) {
             return windowWidth/6
         } else {
@@ -52,22 +57,28 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, se
         
     }, [windowWidth])
 
-    return ( 
-        <div className="banner__container" style={{
+
+    const styles = useMemo(() => ({
+        bannerContainer: {
             minHeight: windowWidth > 2000 ? "70rem" : ""
-        }}>
+        },
+        bannerContent: {
+            top: `${contentPosition()}px`,
+            visibility: bannerData ? "visible" : "hidden"
+        }
+    }), [windowWidth, bannerData, contentPosition])
+
+    return ( 
+        <div className="banner__container" style={styles.bannerContainer}>
             <div className="banner__image__container">
                 <img ref={image} className="banner__image" alt="banner" src={`https://image.tmdb.org/t/p/original${bannerData.backdrop_path}`}></img>
-                <div className="banner__content" style={{
-                    top: `${contentPosition}px`,
-                    visibility: bannerData.id ? "visible" : "hidden"
-                }}>
+                <div className="banner__content" style={styles.bannerContent}>
 
                     <h1 className="banner__title">
                         {title}
                     </h1>
                     <div className="banner__buttons">
-                        <button className="banner__play" onClick={() => handleClick({title: bannerData.title, id: 'banner', movieID: bannerData.id})}>
+                        <button className="banner__play" onClick={() => handleClick(movieDetails)}>
                             <i className={`fas fa-${trailerURL ? "stop" : "play"}`}></i>
                             {trailerURL ? "Stop" : "Play"}
                         </button>

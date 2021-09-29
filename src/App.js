@@ -8,13 +8,13 @@ import { fetchDataStart } from './redux/film/film.actions'
 import { connect } from 'react-redux';
 
 function App({ fetchDataStart, movies }) {
-  //https://api.themoviedb.org/3/movie/{movie_id}/images?api_key=<<api_key>>&language=en-US
+  //--https://api.themoviedb.org/3/movie/{movie_id}/images?api_key=<<api_key>>&language=en-US
 
   (async () => {
     //--Testing movie
-    let api = '08aabbbef104512bb5432031efeae18c'
-    let fetchMovie = await fetch(`https://api.themoviedb.org/3/movie/198663?api_key=${api}&language=en-US`)
-    let movie = await fetchMovie.json()
+    //--let api = '08aabbbef104512bb5432031efeae18c'
+    //--let fetchMovie = await fetch(`https://api.themoviedb.org/3/movie/198663?api_key=${api}&language=en-US`)
+    //--let movie = await fetchMovie.json()
   })()
 
   useEffect(() => {
