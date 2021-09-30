@@ -33,11 +33,11 @@ const Modal = ({ modalActive, bannerData, setModalState }) => {
         if(modalActive) {
             setVisibility("visible")
             setOpacity('1')
-            setTop('4.5%')
+            setTop('10%')
         } else {
             setVisibility("hidden")
             setOpacity('0')
-            setTop('0%')
+            setTop('5%')
         }
 
         if(modalActive) {
