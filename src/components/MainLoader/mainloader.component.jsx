@@ -4,6 +4,7 @@ import './mainloader.styles.scss'
 const MainLoader = ({ displayLoader }) => {
     return (
         <div className="loaderContainer" style={{display: displayLoader ? 'flex' : 'none'}}>
+            <h1 className="loading-text">Loading</h1>
             <div class="showbox">
                 <div class="loader">
                     <svg class="circular" viewBox="25 25 50 50">
@@ -11,7 +12,6 @@ const MainLoader = ({ displayLoader }) => {
                     </svg>
                 </div>
             </div>
-            <h1 className="loading-text">Loading</h1>
         </div>
         
     )
