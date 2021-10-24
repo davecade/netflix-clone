@@ -81,7 +81,7 @@ const Navbar = ({setWindowWidth, setWindowHeight,  windowWidth, searchBarOpen })
         <div className="navbar" style={background}>
             <div className="navbar__content">
                 <div className="navbar__left">
-                    <h1 className="navbar__title">NETFLIX</h1>
+                    <h1 className="navbar__title">NETFLEX</h1>
 
                     {
                         (windowWidth < 1485 && searchBarOpen) || (windowWidth < 1100) ?
