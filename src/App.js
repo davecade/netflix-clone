@@ -28,7 +28,7 @@ const App = ({ fetchDataStart, movies, loading }) => {
     if(!loading) {
       setTimeout(() => {
         setDisplayLoader(false)
-      }, 3000)
+      }, 5000)
     }
 
   }, [fetchDataStart, loading])
