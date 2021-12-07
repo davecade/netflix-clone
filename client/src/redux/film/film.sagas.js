@@ -1,103 +1,61 @@
-import { takeLatest, put, all, call, } from "redux-saga/effects";
-import { filmActionTypes } from './film.types'
-import movieTrailer from 'movie-trailer'
+import { takeLatest, put, all, call } from "redux-saga/effects";
+import { filmActionTypes } from "./film.types";
+import movieTrailer from "movie-trailer";
+import axios from "axios";
 import {
     setBannerData,
     setMovies,
     startLoading,
     fetchDataSuccess,
     fetchDataFailure,
-    setSelectedMovie
-} from './film.actions'
-
-const tmdb = 'https://api.themoviedb.org/3/'
-const apiKey = '08aabbbef104512bb5432031efeae18c'
-const randomNumber = () => Math.floor(Math.random() * 20)+1 // page number must be > 0
-
-const requests = {
-    discover: `${tmdb}discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_providers=netflix&with_watch_monetization_types=flatrate`,
-    popular: `${tmdb}movie/popular?api_key=${apiKey}&language=en-US`,
-    trending: `${tmdb}trending/movie/day?api_key=${apiKey}&language=en-US`,
-    action: `${tmdb}discover/movie?api_key=${apiKey}&language=en-US&with_genres=28`,
-    adventure: `${tmdb}discover/movie?api_key=${apiKey}&language=en-US&with_genres=12`,
-    fantasy: `${tmdb}discover/movie?api_key=${apiKey}&language=en-US&with_genres=80`,
-    scienceFiction: `${tmdb}discover/movie?api_key=${apiKey}&language=en-US&with_genres=878`,
-    animation: `${tmdb}discover/movie?api_key=${apiKey}&language=en-US&with_genres=16`,
-    comedy: `${tmdb}discover/movie?api_key=${apiKey}&language=en-US&with_genres=35`,
-
-}
-
+    setSelectedMovie,
+} from "./film.actions";
 
 export function* fetchDataStartAsync() {
     try {
-        yield put(startLoading())
-        
-        let fetchPopular = fetch(`${requests.popular}&page=${randomNumber()}`)
-        let fetchTrending = fetch(`${requests.trending}&page=${randomNumber()}`)
-        let fetchAction = fetch(`${requests.action}&page=${randomNumber()}`)
-        let fetchAdventure = fetch(`${requests.adventure}&page=${randomNumber()}`)
-        let fetchFantasy = fetch(`${requests.fantasy}&page=${randomNumber()}`)
-        let fetchScienceFiction = fetch(`${requests.scienceFiction}&page=${randomNumber()}`)
-        let fetchAnimation = fetch(`${requests.animation}&page=${randomNumber()}`)
-        let fetchComedy = fetch(`${requests.comedy}&page=${randomNumber()}`)
+        yield put(startLoading());
 
-        let fetchHomepageData = yield Promise.all([
-            fetchPopular,
-            fetchTrending,
-            fetchAction,
-            fetchAdventure,
-            fetchFantasy,
-            fetchScienceFiction,
-            fetchAnimation,
-            fetchComedy
-        ])
+        const getData = yield axios.get("/movies");
+        const dataObject = getData.data;
 
-        let homepageData = yield Promise.all(fetchHomepageData.map( item => {
-            return item.json()
-        } ))
-
-        let fetchBannerData = yield fetch(`https://api.themoviedb.org/3/movie/${homepageData[0].results[randomNumber()-1].id}?api_key=${apiKey}&language=en-US`)
-        let bannerData = yield fetchBannerData.json()
-
-        yield put(setBannerData(bannerData))
-        yield put(setMovies(homepageData))
-        yield put(fetchDataSuccess())
-
-    } catch(error) {
-        yield put(fetchDataFailure(error))
+        yield put(setBannerData(dataObject.bannerData));
+        yield put(setMovies(dataObject.homepageData));
+        yield put(fetchDataSuccess());
+    } catch (error) {
+        yield put(fetchDataFailure(error));
     }
 }
 
-export function* getSelectedMovieAsync({payload: { title, id, movieID }}) {
+export function* getSelectedMovieAsync({ payload: { title, id, movieID } }) {
     try {
-
-        if(title) {
-            let fetchMovieTrailer = yield movieTrailer(title || "")
-            let fetchBannerData = yield fetch(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${apiKey}&language=en-US`)
-            let bannerData = yield fetchBannerData.json()
-            yield put(setSelectedMovie({ url: fetchMovieTrailer, id: id, title: title }))
-            yield put(setBannerData(bannerData))
+        if (title) {
+            let fetchMovieTrailer = yield movieTrailer(title || "");
+            let fetchBannerData = yield axios.get(`/movies/${movieID}`);
+            let bannerData = fetchBannerData.data.bannerData;
+            yield put(
+                setSelectedMovie({
+                    url: fetchMovieTrailer,
+                    id: id,
+                    title: title,
+                })
+            );
+            yield put(setBannerData(bannerData));
         } else {
-            yield put(setSelectedMovie({ url: '', id: '', title: '' }))
+            yield put(setSelectedMovie({ url: "", id: "", title: "" }));
         }
-
-    } catch(error) {
-        console.log(error)
+    } catch (error) {
+        console.log(error);
     }
 }
 
-
-export function* onFetchDataStart(){
-    yield takeLatest(filmActionTypes.FETCH_DATA_START, fetchDataStartAsync)
+export function* onFetchDataStart() {
+    yield takeLatest(filmActionTypes.FETCH_DATA_START, fetchDataStartAsync);
 }
 
-export function* onGetSelectedMovie(){
-    yield takeLatest(filmActionTypes.GET_SELECTED_MOVIE, getSelectedMovieAsync)
+export function* onGetSelectedMovie() {
+    yield takeLatest(filmActionTypes.GET_SELECTED_MOVIE, getSelectedMovieAsync);
 }
 
 export function* filmSagas() {
-    yield all([
-        call(onFetchDataStart),
-        call(onGetSelectedMovie)
-    ])
+    yield all([call(onFetchDataStart), call(onGetSelectedMovie)]);
 }
