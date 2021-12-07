@@ -1,23 +1,22 @@
 .tabdropdown__container {
     position: absolute;
     text-align: center;
-    transition: all .5s ease;
+    transition: all 0.5s ease;
     top: 5rem;
     left: 3rem;
 
     .icon-container {
-        height: .8rem;
+        height: 0.8rem;
 
         .fas.fa-sort-up {
             font-size: 2rem;
             color: white;
-
         }
     }
 
     .tabdropdown__box {
-        background-color: rgba(0,0,0,.8);
-        border-top: .3rem solid white;
+        background-color: rgba(0, 0, 0, 0.8);
+        border-top: 0.3rem solid white;
         color: white;
         width: 27rem;
         height: fit-content;
@@ -27,7 +26,7 @@
             font-size: 1.3rem;
 
             &:hover {
-                background-color: rgba(255, 255, 255, .1);
+                background-color: rgba(255, 255, 255, 0.1);
                 opacity: 0.9;
                 cursor: pointer;
             }

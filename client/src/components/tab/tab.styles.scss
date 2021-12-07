@@ -1,14 +1,14 @@
 .navbar__tab {
     margin: 0 1rem;
-    font-size: .9rem;
+    font-size: 0.9rem;
     transition-property: opacity;
-    transition-duration: .5s;
+    transition-duration: 0.5s;
 
-    @media(min-width: 1500px) {
+    @media (min-width: 1500px) {
         font-size: 1rem;
     }
 
-    @media(min-width: 2000px) {
+    @media (min-width: 2000px) {
         font-size: 1.2rem;
     }
 

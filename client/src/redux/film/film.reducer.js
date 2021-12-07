@@ -1,49 +1,48 @@
-import { filmActionTypes } from '../film/film.types'
+import { filmActionTypes } from "../film/film.types";
 
 const INITIAL_STATE = {
     bannerData: [],
     movies: [],
-    selectedMovie: {id: '', title: '', url: ''},
+    selectedMovie: { id: "", title: "", url: "" },
     loading: false,
-    error: null
-}
+    error: null,
+};
 
 const filmReducer = (state = INITIAL_STATE, action) => {
-
-    switch(action.type) {
+    switch (action.type) {
         case filmActionTypes.SET_BANNER_DATA:
             return {
                 ...state,
-                bannerData: action.payload
-            }
+                bannerData: action.payload,
+            };
 
         case filmActionTypes.SET_MOVIES:
             return {
                 ...state,
-                movies: action.payload
-            }
+                movies: action.payload,
+            };
         case filmActionTypes.SET_SELECTED_MOVIE:
             return {
                 ...state,
-                selectedMovie: action.payload
-            }
-        
+                selectedMovie: action.payload,
+            };
+
         case filmActionTypes.FETCH_DATA_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                error: null
-            }
+                error: null,
+            };
         case filmActionTypes.FETCH_DATA_FAILURE:
             return {
                 ...state,
                 loading: false,
-                error: action.payload
-            }
+                error: action.payload,
+            };
 
         default:
-            return state
+            return state;
     }
-}
+};
 
 export default filmReducer;

@@ -70,7 +70,7 @@ const Category = ({ windowWidth, category, categoryID, loading, selectedMovie })
                 </div>
                 <div  className="category__content">
                     <div onClick={scrollLeft} className="scroll__left" >
-                        <i class="fas fa-chevron-left"></i>
+                        <i className="fas fa-chevron-left"></i>
                     </div>
                         <div ref={scroller} className="category__items">
                             {
@@ -82,7 +82,7 @@ const Category = ({ windowWidth, category, categoryID, loading, selectedMovie })
                             }
                         </div>
                     <div onClick={scrollRight} className="scroll__right">
-                        <i class="fas fa-chevron-right"></i>
+                        <i className="fas fa-chevron-right"></i>
                     </div>
                 </div>
             </div>

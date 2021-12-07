@@ -5,6 +5,8 @@ import './film.styles.scss'
 
 const Film = ({film, getSelectedMovie , categoryID, selectedMovie }) => {
 
+    const posterPath = `https://image.tmdb.org/t/p/original${film.poster_path}`
+
     const handleClick = movie => {
 
         if(selectedMovie.title === movie.title) {
@@ -17,7 +19,7 @@ const Film = ({film, getSelectedMovie , categoryID, selectedMovie }) => {
 
     return (
         <div className="film__container" onClick={() => handleClick({title: film.title, id: categoryID, movieID: film.id})}>
-            <img src={`https://image.tmdb.org/t/p/original${film.poster_path}`} alt="" />
+            <img src={posterPath ? posterPath : ''} alt="" />
         </div>
     )
 }

@@ -72,7 +72,7 @@ const Modal = ({ modalActive, bannerData, setModalState }) => {
                 <div ref={modalEl} className="modal" style={inlineStyles.modal}>
                     <div className="modal__content">
                         <div className="modal__image__container">
-                            <img ref={bannerImage} className="modal__image" alt="poster" src={`https://image.tmdb.org/t/p/original${bannerData.backdrop_path}`}></img>
+                            <img ref={bannerImage} className="modal__image" alt="poster" src={bannerData.backdrop_path ? `https://image.tmdb.org/t/p/original${bannerData.backdrop_path}` : ''}></img>
                             <div className="modal__image__content">
                             </div>
                             <div className="close__button" onClick={() => setModalState(false)}>

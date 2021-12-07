@@ -71,7 +71,7 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, se
     return ( 
         <div className="banner__container" style={inlineStyles.bannerContainer}>
             <div className="banner__image__container">
-                <img ref={image} className="banner__image" alt="banner" src={`https://image.tmdb.org/t/p/original${bannerData.backdrop_path}`}></img>
+                <img ref={image} className="banner__image" alt="banner" src={bannerData.backdrop_path ? `https://image.tmdb.org/t/p/original${bannerData.backdrop_path}`: ''}></img>
                 <div className="banner__content" style={inlineStyles.bannerContent}>
 
                     <h1 className="banner__title">
@@ -83,7 +83,7 @@ const Banner = ({bannerData, windowWidth, getSelectedMovie, setSelectedMovie, se
                             {trailerURL ? "Stop" : "Play"}
                         </button>
                         <button className="banner__info" onClick={() => setModalState(true)}>
-                            <i class="fas fa-info-circle"></i>
+                            <i className="fas fa-info-circle"></i>
                             More info
                         </button>
                     </div>

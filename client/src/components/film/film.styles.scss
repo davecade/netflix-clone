@@ -3,14 +3,14 @@
     min-width: 11rem;
     background-color: #131312;
     border-radius: 10px;
-    margin: 0 .3rem;
+    margin: 0 0.3rem;
     text-align: center;
     color: white;
     transition-property: transform;
-    transition-duration: .5s;
+    transition-duration: 0.5s;
     border: 1px solid black;
 
-    &:hover{
+    &:hover {
         transform: scale(1.2);
         cursor: pointer;
     }
