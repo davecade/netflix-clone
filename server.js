@@ -78,8 +78,8 @@ app.get("/movies", async (req, res) => {
         const bannerData = await fetchBannerData.data;
 
         res.status(200).send({
-            bannerData: bannerData,
-            homepageData: homepageData,
+            bannerData,
+            homepageData,
         });
     } catch (error) {
         console.log(error);
