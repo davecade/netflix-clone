@@ -28,7 +28,8 @@ const requests = {
     comedy: `${tmdb}discover/movie?api_key=${apiKey}&language=en-US&with_genres=35`,
 };
 
-app.get("/movies", async (req, res) => {
+//-- Route Handlers --//
+const getAllMovies = async (req, res) => {
     try {
         const fetchPopular = axios.get(
             `${requests.popular}&page=${randomNumber()}`
@@ -84,9 +85,9 @@ app.get("/movies", async (req, res) => {
     } catch (error) {
         console.log(error);
     }
-});
+};
 
-app.get("/movies/:movieId", async (req, res) => {
+const getMovie = async (req, res) => {
     try {
         const fetchBannerData = await axios.get(
             `https://api.themoviedb.org/3/movie/${req.params.movieId}?api_key=${apiKey}&language=en-US`
@@ -96,8 +97,13 @@ app.get("/movies/:movieId", async (req, res) => {
     } catch (error) {
         console.log(error);
     }
-});
+};
 
+//-- Routes --//
+app.get("/movies", getAllMovies);
+app.get("/movies/:movieId", getMovie);
+
+//-- Production Route--//
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "client/build")));
 
